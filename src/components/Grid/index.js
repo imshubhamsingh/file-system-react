@@ -1,0 +1,63 @@
+import React, { Component } from 'react';
+import styled from 'styled-components';
+
+import Icon from '../Icon';
+import Add from '../Add';
+
+const initialData = [
+  {
+    type: 'folder',
+    name: 'apps',
+    path: '/apps',
+    size: 123,
+    createdAt: Date.now,
+    children: []
+  },
+  {
+    type: 'folder',
+    name: 'picture',
+    path: '/picture',
+    size: 123,
+    createdAt: Date.now,
+    children: []
+  },
+  {
+    type: 'folder',
+    name: 'videos',
+    path: '/videos',
+    size: 123,
+    createdAt: Date.now,
+    children: []
+  },
+  {
+    type: 'file',
+    name: 'a.docx',
+    path: '/',
+    ext: 'docxdffdsfd',
+    size: 123,
+    createdAt: Date.now
+  }
+];
+
+export default class Grid extends Component {
+  state = {
+    icons: initialData
+  };
+  render() {
+    return (
+      <Container>
+        {this.state.icons.map(entry => (
+          <Icon entry={entry} />
+        ))}
+        <Add />
+      </Container>
+    );
+  }
+}
+
+const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 40px 0;
+`;
