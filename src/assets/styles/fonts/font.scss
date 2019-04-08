@@ -3,7 +3,6 @@
   src: url('Proxima Nova Alt Regular-webfont.eot');
   src: url('Proxima Nova Alt Regular-webfont.eot?#iefix')
       format('embedded-opentype'),
-    url('Proxima Nova Alt Regular-webfont.woff2') format('woff2'),
     url('Proxima Nova Alt Regular-webfont.woff') format('woff'),
     url('Proxima Nova Alt Regular-webfont.ttf') format('truetype'),
     url('Proxima Nova Alt Regular-webfont.svg#proxima_nova_altregular')
@@ -18,8 +17,7 @@
   src: url('lato-regular.eot?#iefix') format('embedded-opentype'),
     url('lato-regular.woff2') format('woff2'),
     url('lato-regular.woff') format('woff'),
-    url('lato-regular.ttf') format('truetype'),
-    url('lato-regular') format('svg');
+    url('lato-regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

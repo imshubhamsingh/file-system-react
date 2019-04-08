@@ -11,15 +11,14 @@ const initialData = [
     path: '/apps',
     size: 123,
     createdAt: Date.now,
-    children: []
+    parent: '/'
   },
   {
     type: 'folder',
     name: 'picture',
     path: '/picture',
     size: 123,
-    createdAt: Date.now,
-    children: []
+    createdAt: Date.now
   },
   {
     type: 'folder',
@@ -27,7 +26,24 @@ const initialData = [
     path: '/videos',
     size: 123,
     createdAt: Date.now,
-    children: []
+    children: [
+      {
+        type: 'file',
+        name: 'a.docx',
+        path: '/',
+        ext: 'docxdffdsfd',
+        size: 123,
+        createdAt: Date.now
+      }
+    ]
+  },
+  {
+    type: 'file',
+    name: 'a.docx',
+    path: '/',
+    ext: 'docxdffdsfd',
+    size: 123,
+    createdAt: Date.now
   },
   {
     type: 'file',
@@ -40,14 +56,20 @@ const initialData = [
 ];
 
 export default class Grid extends Component {
+  nodeRef = React.createRef();
+
   state = {
-    icons: initialData
+    icons: initialData,
+    style: {
+      right: 0,
+      left: 0
+    }
   };
   render() {
     return (
       <Container>
-        {this.state.icons.map(entry => (
-          <Icon entry={entry} />
+        {this.state.icons.map((entry, _) => (
+          <Icon entry={entry} index={_} />
         ))}
         <Add />
       </Container>
