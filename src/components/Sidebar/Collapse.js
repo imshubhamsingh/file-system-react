@@ -13,6 +13,17 @@ export default class Collapse extends Component {
   };
 
   render() {
-    return this.props.children(this.state.visible, this.handleVisible);
+    return (
+      <Container>
+        {this.props.children(this.state.visible, this.handleVisible)}
+      </Container>
+    );
   }
 }
+
+const Container = styled.div`
+  &::after {
+    content: '';
+    position: absolute;
+  }
+`;

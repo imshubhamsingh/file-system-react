@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Navigation from '../Navigation';
 import SearchBar from '../SearchBar';
 import Grid from '../Grid';
+import FileInfo from '../FileInfo';
 
 export default class FileSystem extends Component {
   render() {

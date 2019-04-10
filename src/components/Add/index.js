@@ -1,10 +1,19 @@
-import React, { Component } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
+import CreateNew from '../CreateNew';
 
-export default class Add extends Component {
-  render() {
-    return <Container>+</Container>;
-  }
+export default function Add() {
+  const [open, handleOpen] = useState(false);
+  return (
+    <Fragment>
+      <Container onClick={() => handleOpen(true)}>+</Container>
+      {open ? (
+        <CreateNew title="Create New" closeFn={() => handleOpen(false)} />
+      ) : (
+        ''
+      )}
+    </Fragment>
+  );
 }
 
 const Container = styled.div`

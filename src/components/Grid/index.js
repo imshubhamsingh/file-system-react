@@ -11,6 +11,7 @@ const initialData = [
     path: '/apps',
     size: 123,
     createdAt: Date.now,
+    creatorName: 'Shubham Singh',
     parent: '/'
   },
   {
@@ -18,6 +19,7 @@ const initialData = [
     name: 'picture',
     path: '/picture',
     size: 123,
+    creatorName: 'Shubham Singh',
     createdAt: Date.now
   },
   {
@@ -26,6 +28,7 @@ const initialData = [
     path: '/videos',
     size: 123,
     createdAt: Date.now,
+    creatorName: 'Shubham Singh',
     children: [
       {
         type: 'file',
@@ -33,7 +36,8 @@ const initialData = [
         path: '/',
         ext: 'docxdffdsfd',
         size: 123,
-        createdAt: Date.now
+        createdAt: Date.now,
+        creatorName: 'Shubham Singh'
       }
     ]
   },
@@ -43,7 +47,8 @@ const initialData = [
     path: '/',
     ext: 'docxdffdsfd',
     size: 123,
-    createdAt: Date.now
+    createdAt: Date.now,
+    creatorName: 'Shubham Singh'
   },
   {
     type: 'file',
@@ -51,7 +56,8 @@ const initialData = [
     path: '/',
     ext: 'docxdffdsfd',
     size: 123,
-    createdAt: Date.now
+    createdAt: Date.now,
+    creatorName: 'Shubham Singh'
   }
 ];
 

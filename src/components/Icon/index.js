@@ -4,12 +4,14 @@ import styled from 'styled-components';
 import FileIcon from '@Image/file.png';
 import FolderIcon from '@Image/folder.png';
 import Menu from '../Menu';
+import FileInfo from '../FileInfo';
 
 class Icon extends Component {
   nodeRef = React.createRef();
 
   state = {
     visible: false,
+    showInfo: false,
     style: {
       right: 0,
       left: 0
@@ -39,6 +41,10 @@ class Icon extends Component {
       this.setState({
         visible: false,
         style: {
+          right: 0,
+          left: 0
+        },
+        previousValue: {
           right: 0,
           left: 0
         }
@@ -79,9 +85,15 @@ class Icon extends Component {
       style.top = `${clickY - rootH - 5}px`;
     }
 
+    const prevStyle = {
+      top: style.top,
+      left: style.left
+    };
+
     this.setState({
       style,
-      visible: true
+      visible: true,
+      prevStyle
     });
   };
 
@@ -143,14 +155,44 @@ class Icon extends Component {
             style={this.state.style}
             content={[
               { info: 'Open', onClick: () => console.log('open') },
-              { info: 'Get Info', onClick: () => console.log('get info') },
+              {
+                info: 'Get Info',
+                onClick: () =>
+                  this.setState({
+                    showInfo: true
+                  })
+              },
               {
                 info: 'Delete',
                 style: { color: 'red' },
-                onClick: () => console.log('delete')
+                onClick: () => {
+                  console.log('delete');
+                }
               }
             ]}
           />
+        )}
+        {this.state.showInfo ? (
+          <FileInfo
+            title="File Info"
+            style={this.state.prevStyle}
+            closeFn={() =>
+              this.setState({
+                showInfo: false
+              })
+            }
+            entry={{
+              type: entry.type,
+              name: entry.name,
+              path: '/',
+              ext: ext,
+              size: entry.size,
+              createdAt: entry.createdAt,
+              creatorName: entry.creatorName
+            }}
+          />
+        ) : (
+          ''
         )}
       </Container>
     );

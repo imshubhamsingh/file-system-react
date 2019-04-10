@@ -10,7 +10,9 @@ class SideMenu extends Component {
       if (!subOption.children) {
         return (
           <LinkContainer key={subOption.name}>
-            <div className="link">{subOption.name}</div>
+            <div className="link" style={{ marginLeft: `${10 * i}px` }}>
+              {subOption.name}
+            </div>
           </LinkContainer>
         );
       }
@@ -20,16 +22,19 @@ class SideMenu extends Component {
             return (
               <Fragment>
                 <LinkContainer key={subOption.name}>
-                  <div className="link">
-                    {subOption.name} {i}
+                  <div
+                    className="link"
+                    style={{
+                      marginLeft: `${10 * i}px`
+                    }}
+                  >
+                    {subOption.name}
                   </div>
                   <div className="dropdown" onClick={() => handleVisible()}>
                     <DropDownIcon className={visible ? '' : 'clicked'} />
                   </div>
                 </LinkContainer>
-                <div style={{ marginLeft: `${10 * i}px` }}>
-                  {visible ? this.handler(subOption.children, i) : ''}
-                </div>
+                <div>{visible ? this.handler(subOption.children, i) : ''}</div>
               </Fragment>
             );
           }}
@@ -47,6 +52,7 @@ export default SideMenu;
 
 const LinkContainer = styled.div`
   width: 100%;
+  position: relative;
   padding: 7px 32px;
   font-family: Lato, sans-serif;
   font-size: 16px;
@@ -80,4 +86,12 @@ const DropDownIcon = styled.div`
   &.clicked {
     transform: rotate(180deg);
   }
+`;
+
+const Bar = styled.div`
+  height: 20px;
+  width: 5px;
+  position: absolute;
+  z-index: 20;
+  background: red;
 `;
