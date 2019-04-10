@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Formik, Field } from 'formik';
+import * as Yup from 'yup';
 import withModal from '@Elements/Modal';
 
-import FileIcon from '@Image/file.png';
-import FolderIcon from '@Image/folder.png';
+const validationSchema = Yup.object({
+  name: Yup.string('Enter a name').required('Name is required'),
+  creatorName: Yup.string('').required('Enter creator name'),
+  size: Yup.number().required('Enter size'),
+  date: Yup.date('Enter your password').required('Date is required')
+});
 
 class FileInfo extends Component {
+  initialState = {
+    type: 'file',
+    name: '',
+    creatorName: '',
+    size: 0,
+    date: Date.now
+  };
+
   state = {
     type: 'file',
     name: '',
     creatorName: '',
-    date: null
+    size: 0,
+    date: Date.now
   };
   render() {
     return (
@@ -32,39 +47,60 @@ class FileInfo extends Component {
           </Toggle.Container>
         </Top>
 
-        <Form.Container>
-          <Form.Field>
-            <Form.Input
-              placeholder="Name"
-              onChange={event => this.setState({ name: event.target.value })}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input
-              placeholder="Creator"
-              onChange={event =>
-                this.setState({ creatorName: event.target.value })
-              }
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input
-              placeholder="Size"
-              type="number"
-              onChange={event => this.setState({ size: event.target.value })}
-            />
-          </Form.Field>
-          <Form.Field>
-            <Form.Input
-              placeholder="Date"
-              type="date"
-              onChange={event =>
-                this.setState({ date: Date(event.target.value) })
-              }
-            />
-          </Form.Field>
-          <Form.Submit>Create</Form.Submit>
-        </Form.Container>
+        <Formik
+          initialValues={this.initialState}
+          onSubmit={(values, actions) => {
+            this.props.addEntry({
+              ...values,
+              type: this.state.type
+            });
+            console.log(values);
+            this.props.closeFn();
+          }}
+        >
+          {props => (
+            <Form.Container>
+              <Field
+                placeholder="Name"
+                onChange={props.handleChange}
+                name="name"
+                className="formField"
+                value={props.values.name}
+              />
+              <Field
+                placeholder="Creator"
+                onChange={props.handleChange}
+                name="creatorName"
+                className="formField"
+                value={props.values.creatorName}
+              />
+              <Field
+                placeholder="Size"
+                type="number"
+                onChange={props.handleChange}
+                name="size"
+                min="0"
+                className="formField"
+                value={props.values.size}
+              />
+              <Field
+                placeholder="date"
+                type="date"
+                onChange={props.handleChange}
+                name="date"
+                className="formField"
+                value={props.values.date}
+              />
+              <Form.Submit
+                type="submit"
+                disabled={!props.dirty && !props.isSubmitting}
+                onClick={props.handleSubmit}
+              >
+                Create
+              </Form.Submit>
+            </Form.Container>
+          )}
+        </Formik>
       </Container>
     );
   }
@@ -112,32 +148,40 @@ const Toggle = {
 const Form = {
   Container: styled.div`
     padding: 1px 48px;
-  `,
-  Field: styled.div``,
-  Input: styled.input`
-    width: 100%;
-    background: #ffffff;
-    border: 1px solid #dde0e4;
-    border-radius: 8px;
-    font-family: Lato, sans-serif;
-    font-size: 14px;
-    padding: 10px;
-    margin-bottom: 20px;
-    &::placeholder {
-      color: #afb2b6;
+    & .formField {
+      width: 100%;
+      background: #ffffff;
+      border: 1px solid #dde0e4;
+      border-radius: 8px;
+      font-family: Lato, sans-serif;
+      font-size: 14px;
+      padding: 10px;
+      margin-bottom: 20px;
+      &::placeholder {
+        color: #afb2b6;
+      }
+      &[type='date']::placeholder {
+        color: #afb2b6;
+      }
     }
-    &[type='date']::placeholder {
-      color: #afb2b6;
-    }
   `,
-  Submit: styled.button`
+  Submit: styled.div`
     background: #4ab7ff;
     border-radius: 8px;
     color: white;
     font-size: 14px;
+    justify-content: center;
+    font-family: Lato, sans-serif;
+    display: flex;
+    align-items: center;
     border: none;
     cursor: pointer;
     width: 100%;
     height: 40px;
+    transition: opacity 250ms ease-in;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
   `
 };

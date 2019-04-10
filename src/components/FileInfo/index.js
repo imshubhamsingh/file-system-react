@@ -34,7 +34,7 @@ const nth = d => {
   }
 };
 const formatDate = value => {
-  let date = new Date(value());
+  let date = new Date(value);
   var day = date.getDate(),
     monthIndex = date.getMonth(),
     year = date.getFullYear().toString();
@@ -78,12 +78,7 @@ class FileInfo extends Component {
   }
 }
 
-export default withModal(FileInfo)({
-  style: {
-    position: 'absolute',
-    zIndex: 200
-  }
-});
+export default withModal(FileInfo)({});
 
 const Icon = styled.div`
   width: 100%;

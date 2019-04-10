@@ -10,13 +10,15 @@
   "author": "Shubham",
   "license": "ISC",
   "dependencies": {
+    "formik": "^1.5.2",
     "parcel-bundler": "^1.10.3",
     "reac": "^0.0.0",
-    "react": "^16.7.0-alpha.2",
+    "react": ">=15",
     "react-dom": "^16.7.0-alpha.2",
     "react-router-dom": "^4.4.0-beta.6",
     "redux": "^4.0.1",
-    "styled-components": "^4.1.1"
+    "styled-components": "^4.1.1",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",

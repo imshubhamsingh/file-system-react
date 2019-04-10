@@ -2,13 +2,17 @@ import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import CreateNew from '../CreateNew';
 
-export default function Add() {
+export default function Add(props) {
   const [open, handleOpen] = useState(false);
   return (
     <Fragment>
       <Container onClick={() => handleOpen(true)}>+</Container>
       {open ? (
-        <CreateNew title="Create New" closeFn={() => handleOpen(false)} />
+        <CreateNew
+          title="Create New"
+          closeFn={() => handleOpen(false)}
+          addEntry={value => props.saveEntry(value)}
+        />
       ) : (
         ''
       )}

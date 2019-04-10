@@ -10,7 +10,7 @@ const initialData = [
     name: 'apps',
     path: '/apps',
     size: 123,
-    createdAt: Date.now,
+    createdAt: '2019-04-07',
     creatorName: 'Shubham Singh',
     parent: '/'
   },
@@ -20,14 +20,14 @@ const initialData = [
     path: '/picture',
     size: 123,
     creatorName: 'Shubham Singh',
-    createdAt: Date.now
+    createdAt: '2019-04-07'
   },
   {
     type: 'folder',
     name: 'videos',
     path: '/videos',
     size: 123,
-    createdAt: Date.now,
+    createdAt: '2019-04-07',
     creatorName: 'Shubham Singh',
     children: [
       {
@@ -36,7 +36,7 @@ const initialData = [
         path: '/',
         ext: 'docxdffdsfd',
         size: 123,
-        createdAt: Date.now,
+        createdAt: '2019-04-07',
         creatorName: 'Shubham Singh'
       }
     ]
@@ -47,7 +47,7 @@ const initialData = [
     path: '/',
     ext: 'docxdffdsfd',
     size: 123,
-    createdAt: Date.now,
+    createdAt: '2019-04-07',
     creatorName: 'Shubham Singh'
   },
   {
@@ -56,7 +56,7 @@ const initialData = [
     path: '/',
     ext: 'docxdffdsfd',
     size: 123,
-    createdAt: Date.now,
+    createdAt: '2019-04-07',
     creatorName: 'Shubham Singh'
   }
 ];
@@ -77,7 +77,24 @@ export default class Grid extends Component {
         {this.state.icons.map((entry, _) => (
           <Icon entry={entry} index={_} />
         ))}
-        <Add />
+        <Add
+          saveEntry={value => {
+            console.log(value);
+            this.setState(
+              prevState => {
+                const newData = initialData;
+                newData.push(value);
+                console.log(newData);
+                return {
+                  icons: newData
+                };
+              },
+              () => {
+                console.log(this.state.icons);
+              }
+            );
+          }}
+        />
       </Container>
     );
   }

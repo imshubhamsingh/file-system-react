@@ -67,13 +67,11 @@ const withModal = WrappedComponent => props =>
 
       return (
         <Container
-          style={
-            props.style ? props.style : this.props.style ? this.props.style : {}
-          }
+          style={{
+            transform: `translate(${translateX}px, ${translateY}px)`
+          }}
           onMouseDown={this.handleMouseDown}
           onmouseup={this.handleMouseUp}
-          x={translateX}
-          y={translateY}
           className="draggable"
           ref={this._ref}
         >
@@ -100,7 +98,6 @@ const Container = styled.div`
   border: 1px solid rgba(221, 224, 228, 0.7);
   box-shadow: 0 16px 64px 0 rgba(0, 0, 0, 0.08);
   border-radius: 8px;
-  transform: ${props => `translate(${props.x}px, ${props.y}px)`};
 `;
 
 const Title = styled.div`
