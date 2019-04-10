@@ -1,12 +1,84 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import styled from 'styled-components';
 
 import MagnifyIcon from './MagnifyIcon';
+import SearchResults from './SearchResults';
 
+const initialData = [
+  {
+    type: 'folder',
+    name: 'apps',
+    path: '/apps',
+    size: 123,
+    createdAt: '2019-04-07',
+    creatorName: 'Shubham Singh',
+    parent: '/'
+  },
+  {
+    type: 'folder',
+    name: 'picture',
+    path: '/picture',
+    size: 123,
+    creatorName: 'Shubham Singh',
+    createdAt: '2019-04-07'
+  },
+  {
+    type: 'folder',
+    name: 'videos',
+    path: '/videos',
+    size: 123,
+    createdAt: '2019-04-07',
+    creatorName: 'Shubham Singh',
+    children: [
+      {
+        type: 'file',
+        name: 'a.docx',
+        path: '/',
+        ext: 'docxdffdsfd',
+        size: 123,
+        createdAt: '2019-04-07',
+        creatorName: 'Shubham Singh'
+      }
+    ]
+  },
+  {
+    type: 'file',
+    name: 'a.docx',
+    path: '/',
+    ext: 'docxdffdsfd',
+    size: 123,
+    createdAt: '2019-04-07',
+    creatorName: 'Shubham Singh'
+  },
+  {
+    type: 'file',
+    name: 'a.docx',
+    path: '/',
+    ext: 'docxdffdsfd',
+    size: 123,
+    createdAt: '2019-04-07',
+    creatorName: 'Shubham Singh'
+  }
+];
 export default class SearchBar extends Component {
+  _ref = createRef();
+  state = {
+    term: '',
+    width: 0
+  };
+
+  componentDidMount() {
+    this.setState(prevState => {
+      const { width } = getComputedStyle(this._ref.current);
+      return {
+        width
+      };
+    });
+  }
+
   render() {
     return (
-      <Input placeholder="Search for anything">
+      <Input placeholder="Search for anything" ref={this._ref}>
         <MagnifyIcon
           fill="#545B61"
           style={{
@@ -17,7 +89,21 @@ export default class SearchBar extends Component {
           }}
           size={15}
         />
-        <input placeholder="Search for Anything" />
+        <input
+          placeholder="Search for Anything"
+          value={this.state.term}
+          onChange={event => this.setState({ term: event.target.value })}
+        />
+        {this.state.term.length > 0 ? (
+          <SearchResults
+            style={{ width: this.state.width }}
+            term={this.state.term}
+            isDraggable={false}
+            data={initialData}
+          />
+        ) : (
+          ''
+        )}
       </Input>
     );
   }

@@ -7,13 +7,10 @@ const withModal = WrappedComponent => props =>
     _ref = createRef();
     state = {
       isDragging: false,
-
       originalX: 0,
       originalY: 0,
-
       translateX: 0,
       translateY: 0,
-
       lastTranslateX: 0,
       lastTranslateY: 0
     };
@@ -26,6 +23,10 @@ const withModal = WrappedComponent => props =>
     }
 
     handleMouseDown = ({ clientX, clientY }) => {
+      if (this.props.isDraggale) {
+        return;
+      }
+
       this._ref.current.addEventListener('mousemove', this.handleMouseMove);
       this._ref.current.addEventListener('mouseup', this.handleMouseUp);
 
@@ -64,10 +65,15 @@ const withModal = WrappedComponent => props =>
 
     render() {
       const { translateX, translateY } = this.state;
-
+      const style = props.style
+        ? props.style
+        : this.props.style
+        ? this.props.style
+        : {};
       return (
         <Container
           style={{
+            ...style,
             transform: `translate(${translateX}px, ${translateY}px)`
           }}
           onMouseDown={this.handleMouseDown}

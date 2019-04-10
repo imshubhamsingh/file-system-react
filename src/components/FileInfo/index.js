@@ -78,7 +78,12 @@ class FileInfo extends Component {
   }
 }
 
-export default withModal(FileInfo)({});
+export default withModal(FileInfo)({
+  style: {
+    position: 'absolute',
+    zIndex: 200
+  }
+});
 
 const Icon = styled.div`
   width: 100%;

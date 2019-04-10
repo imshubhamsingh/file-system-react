@@ -67,6 +67,11 @@ class FileInfo extends Component {
                 className="formField"
                 value={props.values.name}
               />
+              {props.errors.name && props.touched.name ? (
+                <span className={s.field_text}>{props.errors.name}</span>
+              ) : (
+                ''
+              )}
               <Field
                 placeholder="Creator"
                 onChange={props.handleChange}
@@ -74,6 +79,11 @@ class FileInfo extends Component {
                 className="formField"
                 value={props.values.creatorName}
               />
+              {props.errors.name && props.touched.name ? (
+                <span className={s.field_text}>{props.errors.name}</span>
+              ) : (
+                ''
+              )}
               <Field
                 placeholder="Size"
                 type="number"
@@ -83,6 +93,11 @@ class FileInfo extends Component {
                 className="formField"
                 value={props.values.size}
               />
+              {props.errors.name && props.touched.name ? (
+                <span className={s.field_text}>{props.errors.name}</span>
+              ) : (
+                ''
+              )}
               <Field
                 placeholder="date"
                 type="date"
@@ -91,6 +106,12 @@ class FileInfo extends Component {
                 className="formField"
                 value={props.values.date}
               />
+              {props.errors.name && props.touched.name ? (
+                <span className={s.field_text}>{props.errors.name}</span>
+              ) : (
+                ''
+              )}
+
               <Form.Submit
                 type="submit"
                 disabled={!props.dirty && !props.isSubmitting}

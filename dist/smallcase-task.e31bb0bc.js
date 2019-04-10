@@ -33157,7 +33157,11 @@ var _default = function _default(props) {
 };
 
 exports.default = _default;
-},{"react":"node_modules/react/index.js"}],"src/components/SearchBar/index.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js"}],"src/assets/img/file.png":[function(require,module,exports) {
+module.exports = "/file.c28a8def.png";
+},{}],"src/assets/img/folder.png":[function(require,module,exports) {
+module.exports = "/folder.9ace5266.png";
+},{}],"src/components/SearchBar/SearchResults.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33171,9 +33175,136 @@ var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/creat
 
 var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
 
-var _getPrototypeOf2 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+var _getPrototypeOf3 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _styledComponents = _interopRequireDefault(require("styled-components"));
+
+var _file = _interopRequireDefault(require("../../assets/img/file.png"));
+
+var _folder = _interopRequireDefault(require("../../assets/img/folder.png"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SearchResults =
+/*#__PURE__*/
+function (_Component) {
+  (0, _inherits2.default)(SearchResults, _Component);
+
+  function SearchResults() {
+    var _getPrototypeOf2;
+
+    var _this;
+
+    (0, _classCallCheck2.default)(this, SearchResults);
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(SearchResults)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "state", {
+      mode: 'local'
+    });
+    return _this;
+  }
+
+  (0, _createClass2.default)(SearchResults, [{
+    key: "render",
+    value: function render() {
+      var _this2 = this;
+
+      var data = this.props.data.filter(function (arr) {
+        return arr.name.match(_this2.props.term) !== null;
+      });
+      return _react.default.createElement(Container, {
+        style: this.props.style
+      }, _react.default.createElement(Filter, null, "Search:", _react.default.createElement(Filter.Options, null, _react.default.createElement("span", {
+        className: this.state.mode === 'local' ? 'selected' : '',
+        onClick: function onClick() {
+          return _this2.setState({
+            mode: 'local'
+          });
+        }
+      }, "Local"), _react.default.createElement("span", {
+        className: this.state.mode === 'global' ? 'selected' : '',
+        onClick: function onClick() {
+          return _this2.setState({
+            mode: 'global'
+          });
+        }
+      }, "Global"))), _react.default.createElement(Line, null), data.map(function (arr) {
+        return _react.default.createElement(Result, null, _react.default.createElement(Img, {
+          src: arr.type == 'file' ? _file.default : _folder.default
+        }), arr.name);
+      }));
+    }
+  }]);
+  return SearchResults;
+}(_react.Component);
+
+var _default = SearchResults;
+exports.default = _default;
+
+var Container = _styledComponents.default.div.withConfig({
+  displayName: "SearchResults__Container",
+  componentId: "sc-1es3hi2-0"
+})(["position:absolute;left:-1px;top:33px;z-index:2000;background:#ffffff;border:1px solid rgba(221,224,228,0.7);box-shadow:0 16px 64px 0 rgba(0,0,0,0.08);border-radius:8px;"]);
+
+var Filter = _styledComponents.default.div.withConfig({
+  displayName: "SearchResults__Filter",
+  componentId: "sc-1es3hi2-1"
+})(["display:flex;padding:10px;justify-content:flex-start;"]);
+
+Filter.Options = _styledComponents.default.div.withConfig({
+  displayName: "SearchResults__Options",
+  componentId: "sc-1es3hi2-2"
+})(["border:none;& span{background:#82878b;padding:2px;border-radius:8px;color:white;margin:20px 5px;font-size:15px;cursor:pointer;padding:2px 10px;&.selected{background:#051702;}}"]);
+
+var Line = _styledComponents.default.hr.withConfig({
+  displayName: "SearchResults__Line",
+  componentId: "sc-1es3hi2-3"
+})(["background:#eeeff1;padding:0;margin:-3px 0;opacity:0.25;"]);
+
+var Result = _styledComponents.default.div.withConfig({
+  displayName: "SearchResults__Result",
+  componentId: "sc-1es3hi2-4"
+})(["padding:10px;display:flex;border-bottom:2px solid rgba(238,239,241,0.5);&:hover{background:#eeeff1;}"]);
+
+var Img = _styledComponents.default.img.withConfig({
+  displayName: "SearchResults__Img",
+  componentId: "sc-1es3hi2-5"
+})(["width:23px;height:20px;margin-right:7px;"]);
+},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/assertThisInitialized":"node_modules/@babel/runtime/helpers/assertThisInitialized.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","../../assets/img/file.png":"src/assets/img/file.png","../../assets/img/folder.png":"src/assets/img/folder.png"}],"src/components/SearchBar/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+
+var _possibleConstructorReturn2 = _interopRequireDefault(require("@babel/runtime/helpers/possibleConstructorReturn"));
+
+var _getPrototypeOf3 = _interopRequireDefault(require("@babel/runtime/helpers/getPrototypeOf"));
+
+var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
+
+var _inherits2 = _interopRequireDefault(require("@babel/runtime/helpers/inherits"));
+
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
 
 var _react = _interopRequireWildcard(require("react"));
 
@@ -33181,9 +33312,60 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 
 var _MagnifyIcon = _interopRequireDefault(require("./MagnifyIcon"));
 
+var _SearchResults = _interopRequireDefault(require("./SearchResults"));
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var initialData = [{
+  type: 'folder',
+  name: 'apps',
+  path: '/apps',
+  size: 123,
+  createdAt: '2019-04-07',
+  creatorName: 'Shubham Singh',
+  parent: '/'
+}, {
+  type: 'folder',
+  name: 'picture',
+  path: '/picture',
+  size: 123,
+  creatorName: 'Shubham Singh',
+  createdAt: '2019-04-07'
+}, {
+  type: 'folder',
+  name: 'videos',
+  path: '/videos',
+  size: 123,
+  createdAt: '2019-04-07',
+  creatorName: 'Shubham Singh',
+  children: [{
+    type: 'file',
+    name: 'a.docx',
+    path: '/',
+    ext: 'docxdffdsfd',
+    size: 123,
+    createdAt: '2019-04-07',
+    creatorName: 'Shubham Singh'
+  }]
+}, {
+  type: 'file',
+  name: 'a.docx',
+  path: '/',
+  ext: 'docxdffdsfd',
+  size: 123,
+  createdAt: '2019-04-07',
+  creatorName: 'Shubham Singh'
+}, {
+  type: 'file',
+  name: 'a.docx',
+  path: '/',
+  ext: 'docxdffdsfd',
+  size: 123,
+  createdAt: '2019-04-07',
+  creatorName: 'Shubham Singh'
+}];
 
 var SearchBar =
 /*#__PURE__*/
@@ -33191,15 +33373,47 @@ function (_Component) {
   (0, _inherits2.default)(SearchBar, _Component);
 
   function SearchBar() {
+    var _getPrototypeOf2;
+
+    var _this;
+
     (0, _classCallCheck2.default)(this, SearchBar);
-    return (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(SearchBar).apply(this, arguments));
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = (0, _possibleConstructorReturn2.default)(this, (_getPrototypeOf2 = (0, _getPrototypeOf3.default)(SearchBar)).call.apply(_getPrototypeOf2, [this].concat(args)));
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "_ref", (0, _react.createRef)());
+    (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "state", {
+      term: '',
+      width: 0
+    });
+    return _this;
   }
 
   (0, _createClass2.default)(SearchBar, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.setState(function (prevState) {
+        var _getComputedStyle = getComputedStyle(_this2._ref.current),
+            width = _getComputedStyle.width;
+
+        return {
+          width: width
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return _react.default.createElement(Input, {
-        placeholder: "Search for anything"
+        placeholder: "Search for anything",
+        ref: this._ref
       }, _react.default.createElement(_MagnifyIcon.default, {
         fill: "#545B61",
         style: {
@@ -33210,8 +33424,21 @@ function (_Component) {
         },
         size: 15
       }), _react.default.createElement("input", {
-        placeholder: "Search for Anything"
-      }));
+        placeholder: "Search for Anything",
+        value: this.state.term,
+        onChange: function onChange(event) {
+          return _this3.setState({
+            term: event.target.value
+          });
+        }
+      }), this.state.term.length > 0 ? _react.default.createElement(_SearchResults.default, {
+        style: {
+          width: this.state.width
+        },
+        term: this.state.term,
+        isDraggable: false,
+        data: initialData
+      }) : '');
     }
   }]);
   return SearchBar;
@@ -33223,11 +33450,7 @@ var Input = _styledComponents.default.div.withConfig({
   displayName: "SearchBar__Input",
   componentId: "sc-1wt1iy0-0"
 })(["margin-top:-6px;width:40%;position:relative;height:32px;display:flex;border-radius:8px;border:1px solid #dde0e4;padding:0 8px;font-family:Lato,sans-serif;outline:none;input{border:0;width:100%;font-size:15px;padding:0 0 0 23px;&::placeholder{color:#afb2b6;}}@media screen and (max-width:768px){width:100%;margin-top:20px;}"]);
-},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","./MagnifyIcon":"src/components/SearchBar/MagnifyIcon.js"}],"src/assets/img/file.png":[function(require,module,exports) {
-module.exports = "/file.c28a8def.png";
-},{}],"src/assets/img/folder.png":[function(require,module,exports) {
-module.exports = "/folder.9ace5266.png";
-},{}],"src/components/Menu/index.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/assertThisInitialized":"node_modules/@babel/runtime/helpers/assertThisInitialized.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","./MagnifyIcon":"src/components/SearchBar/MagnifyIcon.js","./SearchResults":"src/components/SearchBar/SearchResults.js"}],"src/components/Menu/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33286,7 +33509,30 @@ var Container = _styledComponents.default.div.withConfig({
   displayName: "Menu__Container",
   componentId: "sc-214stj-0"
 })(["position:absolute;background:white;width:145px;z-index:1000;border:1px solid rgba(221,224,228,0.5);box-shadow:0 12px 24px 0 rgba(0,0,0,0.05);border-radius:8px;& .content{padding:15px;transition:background 250ms ease-in;&:hover{background:#eeeff1;}}"]);
-},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"src/elements/Icon.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js"}],"node_modules/@babel/runtime/helpers/objectSpread.js":[function(require,module,exports) {
+var defineProperty = require("./defineProperty");
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+module.exports = _objectSpread;
+},{"./defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js"}],"src/elements/Icon.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33328,6 +33574,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = void 0;
+
+var _objectSpread2 = _interopRequireDefault(require("@babel/runtime/helpers/objectSpread"));
 
 var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
 
@@ -33388,6 +33636,10 @@ var withModal = function withModal(WrappedComponent) {
           var clientX = _ref.clientX,
               clientY = _ref.clientY;
 
+          if (_this.props.isDraggale) {
+            return;
+          }
+
           _this._ref.current.addEventListener('mousemove', _this.handleMouseMove);
 
           _this._ref.current.addEventListener('mouseup', _this.handleMouseUp);
@@ -33446,10 +33698,11 @@ var withModal = function withModal(WrappedComponent) {
           var _this$state = this.state,
               translateX = _this$state.translateX,
               translateY = _this$state.translateY;
+          var style = props.style ? props.style : this.props.style ? this.props.style : {};
           return _react.default.createElement(Container, {
-            style: {
+            style: (0, _objectSpread2.default)({}, style, {
               transform: "translate(".concat(translateX, "px, ").concat(translateY, "px)")
-            },
+            }),
             onMouseDown: this.handleMouseDown,
             onmouseup: this.handleMouseUp,
             className: "draggable",
@@ -33490,7 +33743,7 @@ var Close = _styledComponents.default.div.withConfig({
   displayName: "Modal__Close",
   componentId: "kotl87-3"
 })(["position:absolute;top:10px;right:24px;padding:13px;cursor:pointer;"]);
-},{"@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/assertThisInitialized":"node_modules/@babel/runtime/helpers/assertThisInitialized.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","./Icon":"src/elements/Icon.js"}],"src/components/FileInfo/index.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/objectSpread":"node_modules/@babel/runtime/helpers/objectSpread.js","@babel/runtime/helpers/classCallCheck":"node_modules/@babel/runtime/helpers/classCallCheck.js","@babel/runtime/helpers/createClass":"node_modules/@babel/runtime/helpers/createClass.js","@babel/runtime/helpers/possibleConstructorReturn":"node_modules/@babel/runtime/helpers/possibleConstructorReturn.js","@babel/runtime/helpers/getPrototypeOf":"node_modules/@babel/runtime/helpers/getPrototypeOf.js","@babel/runtime/helpers/assertThisInitialized":"node_modules/@babel/runtime/helpers/assertThisInitialized.js","@babel/runtime/helpers/inherits":"node_modules/@babel/runtime/helpers/inherits.js","@babel/runtime/helpers/defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js","react":"node_modules/react/index.js","styled-components":"node_modules/styled-components/dist/styled-components.browser.esm.js","./Icon":"src/elements/Icon.js"}],"src/components/FileInfo/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -33576,7 +33829,12 @@ function (_Component) {
   return FileInfo;
 }(_react.Component);
 
-var _default = (0, _Modal.default)(FileInfo)({});
+var _default = (0, _Modal.default)(FileInfo)({
+  style: {
+    position: 'absolute',
+    zIndex: 200
+  }
+});
 
 exports.default = _default;
 
@@ -33921,30 +34179,7 @@ function _slicedToArray(arr, i) {
 }
 
 module.exports = _slicedToArray;
-},{"./arrayWithHoles":"node_modules/@babel/runtime/helpers/arrayWithHoles.js","./iterableToArrayLimit":"node_modules/@babel/runtime/helpers/iterableToArrayLimit.js","./nonIterableRest":"node_modules/@babel/runtime/helpers/nonIterableRest.js"}],"node_modules/@babel/runtime/helpers/objectSpread.js":[function(require,module,exports) {
-var defineProperty = require("./defineProperty");
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    var ownKeys = Object.keys(source);
-
-    if (typeof Object.getOwnPropertySymbols === 'function') {
-      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      defineProperty(target, key, source[key]);
-    });
-  }
-
-  return target;
-}
-
-module.exports = _objectSpread;
-},{"./defineProperty":"node_modules/@babel/runtime/helpers/defineProperty.js"}],"node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
+},{"./arrayWithHoles":"node_modules/@babel/runtime/helpers/arrayWithHoles.js","./iterableToArrayLimit":"node_modules/@babel/runtime/helpers/iterableToArrayLimit.js","./nonIterableRest":"node_modules/@babel/runtime/helpers/nonIterableRest.js"}],"node_modules/tslib/tslib.es6.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -49021,13 +49256,17 @@ function (_Component) {
           name: "name",
           className: "formField",
           value: props.values.name
-        }), _react.default.createElement(_formik.Field, {
+        }), props.errors.name && props.touched.name ? _react.default.createElement("span", {
+          className: s.field_text
+        }, props.errors.name) : '', _react.default.createElement(_formik.Field, {
           placeholder: "Creator",
           onChange: props.handleChange,
           name: "creatorName",
           className: "formField",
           value: props.values.creatorName
-        }), _react.default.createElement(_formik.Field, {
+        }), props.errors.name && props.touched.name ? _react.default.createElement("span", {
+          className: s.field_text
+        }, props.errors.name) : '', _react.default.createElement(_formik.Field, {
           placeholder: "Size",
           type: "number",
           onChange: props.handleChange,
@@ -49035,14 +49274,18 @@ function (_Component) {
           min: "0",
           className: "formField",
           value: props.values.size
-        }), _react.default.createElement(_formik.Field, {
+        }), props.errors.name && props.touched.name ? _react.default.createElement("span", {
+          className: s.field_text
+        }, props.errors.name) : '', _react.default.createElement(_formik.Field, {
           placeholder: "date",
           type: "date",
           onChange: props.handleChange,
           name: "date",
           className: "formField",
           value: props.values.date
-        }), _react.default.createElement(Form.Submit, {
+        }), props.errors.name && props.touched.name ? _react.default.createElement("span", {
+          className: s.field_text
+        }, props.errors.name) : '', _react.default.createElement(Form.Submit, {
           type: "submit",
           disabled: !props.dirty && !props.isSubmitting,
           onClick: props.handleSubmit
