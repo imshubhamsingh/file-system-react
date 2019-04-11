@@ -1,0 +1,25 @@
+{
+  "plugins": [
+    "babel-plugin-styled-components",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime",
+    [
+      "module-resolver",
+      {
+        "root": "./src",
+        "alias": {
+          "@Src": "./src/App.jsx",
+          "@Components": "./src/components",
+          "@Pages": "./src/pages",
+          "@Elements": "./src/elements",
+          "@Styles": "./src/assets/styles",
+          "@Utils": "./src/utils",
+          "@HOC": "./src/hoc",
+          "@Image": "./src/assets/img",
+          "@Reducer": "./src/reducers",
+          "@Action": "./src/actions"
+        }
+      }
+    ]
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "file_system",
+  "version": "1.0.0",
+  "description": "File System UI",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html --public-url ./"
+  },
+  "author": "Shubham",
+  "license": "ISC",
+  "dependencies": {
+    "formik": "^1.5.2",
+    "parcel-bundler": "^1.10.3",
+    "react": ">=15",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^7.0.1",
+    "react-router-dom": "^5.0.0",
+    "redux": "^4.0.1",
+    "spected": "^0.7.0",
+    "styled-components": "^4.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-plugin-styled-components": "^1.8.0",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "react-hot-loader": "^4.3.12",
+    "redux-devtools-extension": "^2.13.8",
+    "sass": "^1.15.0"
+  }
+}
