@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { showPathEntries } from '@Utils/fileSystem';
-import { addEntry } from '@Action/fileSystem';
+import { addEntry, deleteEntry } from '@Action/fileSystem';
 
 import Icon from '../Icon';
 import Add from '../Add';
@@ -19,13 +19,7 @@ class Grid extends Component {
             index={_}
             key={entry.path}
             deleteFn={() => {
-              this.setState(prevState => {
-                let newIcons = prevState.icons;
-                newIcons.splice(_, 1);
-                return {
-                  newIcons
-                };
-              });
+              this.props.deleteEntry(entry.path);
             }}
           />
         ))}
@@ -44,6 +38,7 @@ class Grid extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const path = ownProps.match.url;
+  console.log(state.fileSystem);
   return {
     entry: showPathEntries(path, state.fileSystem)
   };
@@ -51,7 +46,7 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  { addEntry }
+  { addEntry, deleteEntry }
 )(Grid);
 
 const Container = styled.div`

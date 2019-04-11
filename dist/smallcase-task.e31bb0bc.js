@@ -31778,7 +31778,43 @@ exports.devToolsEnhancer = (
     function() { return function(noop) { return noop; } }
 );
 
-},{"redux":"node_modules/redux/es/redux.js"}],"src/utils/constants.js":[function(require,module,exports) {
+},{"redux":"node_modules/redux/es/redux.js"}],"node_modules/@babel/runtime/helpers/arrayWithoutHoles.js":[function(require,module,exports) {
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+
+module.exports = _arrayWithoutHoles;
+},{}],"node_modules/@babel/runtime/helpers/iterableToArray.js":[function(require,module,exports) {
+function _iterableToArray(iter) {
+  if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+}
+
+module.exports = _iterableToArray;
+},{}],"node_modules/@babel/runtime/helpers/nonIterableSpread.js":[function(require,module,exports) {
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+
+module.exports = _nonIterableSpread;
+},{}],"node_modules/@babel/runtime/helpers/toConsumableArray.js":[function(require,module,exports) {
+var arrayWithoutHoles = require("./arrayWithoutHoles");
+
+var iterableToArray = require("./iterableToArray");
+
+var nonIterableSpread = require("./nonIterableSpread");
+
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || nonIterableSpread();
+}
+
+module.exports = _toConsumableArray;
+},{"./arrayWithoutHoles":"node_modules/@babel/runtime/helpers/arrayWithoutHoles.js","./iterableToArray":"node_modules/@babel/runtime/helpers/iterableToArray.js","./nonIterableSpread":"node_modules/@babel/runtime/helpers/nonIterableSpread.js"}],"src/utils/constants.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -32003,6 +32039,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
+
 var _fileSystem = require("../utils/fileSystem");
 
 var _dummyFileSystem = _interopRequireDefault(require("../utils/dummyFileSystem"));
@@ -32018,11 +32056,16 @@ var _default = function _default() {
   switch (action.type) {
     case _constants.ADD_ENTRY:
       {
-        return (0, _fileSystem.AddEntry)(action.payload, data);
+        return [].concat((0, _toConsumableArray2.default)(data), [action.payload]);
       }
 
     case _constants.DELETE_ENTRY:
-      {}
+      {
+        var afterDelete = data.filter(function (node) {
+          return node.path !== action.payload;
+        });
+        return afterDelete;
+      }
 
     default:
       return data;
@@ -32030,7 +32073,7 @@ var _default = function _default() {
 };
 
 exports.default = _default;
-},{"../utils/fileSystem":"src/utils/fileSystem.js","../utils/dummyFileSystem":"src/utils/dummyFileSystem.js","../utils/constants":"src/utils/constants.js"}],"src/reducers/index.js":[function(require,module,exports) {
+},{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","../utils/fileSystem":"src/utils/fileSystem.js","../utils/dummyFileSystem":"src/utils/dummyFileSystem.js","../utils/constants":"src/utils/constants.js"}],"src/reducers/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -51752,13 +51795,7 @@ function (_Component) {
           index: _,
           key: entry.path,
           deleteFn: function deleteFn() {
-            _this2.setState(function (prevState) {
-              var newIcons = prevState.icons;
-              newIcons.splice(_, 1);
-              return {
-                newIcons: newIcons
-              };
-            });
+            _this2.props.deleteEntry(entry.path);
           }
         });
       }), _react.default.createElement(_Add.default, {
@@ -51775,13 +51812,15 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   var path = ownProps.match.url;
+  console.log(state.fileSystem);
   return {
     entry: (0, _fileSystem.showPathEntries)(path, state.fileSystem)
   };
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
-  addEntry: _fileSystem2.addEntry
+  addEntry: _fileSystem2.addEntry,
+  deleteEntry: _fileSystem2.deleteEntry
 })(Grid);
 
 exports.default = _default;
