@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { Route } from 'react-router-dom';
 
 import Navigation from '../Navigation';
 import SearchBar from '../SearchBar';
 import Grid from '../Grid';
-import FileInfo from '../FileInfo';
 
-export default class FileSystem extends Component {
+export default class ViewFiles extends Component {
   render() {
     return (
       <Container>
@@ -14,7 +14,7 @@ export default class FileSystem extends Component {
           <Navigation />
           <SearchBar />
         </TopBar>
-        <Grid />
+        <Route path="*" component={Grid} />
       </Container>
     );
   }

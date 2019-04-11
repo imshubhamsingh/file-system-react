@@ -1,29 +1,13 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { CollapseContainer } from './styles';
 
-export default class Collapse extends Component {
-  state = {
-    visible: false
-  };
-
-  handleVisible = () => {
-    this.setState(prevState => ({
-      visible: !prevState.visible
-    }));
-  };
-
-  render() {
-    return (
-      <Container>
-        {this.props.children(this.state.visible, this.handleVisible)}
-      </Container>
-    );
-  }
+function Collapse(props) {
+  const [visible, handleVisible] = useState(false);
+  return (
+    <CollapseContainer>
+      {props.children(visible, () => handleVisible(!visible))}
+    </CollapseContainer>
+  );
 }
 
-const Container = styled.div`
-  &::after {
-    content: '';
-    position: absolute;
-  }
-`;
+export default Collapse;

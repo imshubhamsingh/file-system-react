@@ -12,14 +12,6 @@ const validationSchema = Yup.object({
 });
 
 class FileInfo extends Component {
-  initialState = {
-    type: 'file',
-    name: '',
-    creatorName: '',
-    size: 0,
-    date: Date.now
-  };
-
   state = {
     type: 'file',
     name: '',
@@ -48,13 +40,18 @@ class FileInfo extends Component {
         </Top>
 
         <Formik
-          initialValues={this.initialState}
+          initialValues={{
+            type: 'file',
+            name: '',
+            creatorName: '',
+            size: 0,
+            date: Date.now
+          }}
           onSubmit={(values, actions) => {
             this.props.addEntry({
               ...values,
               type: this.state.type
             });
-            console.log(values);
             this.props.closeFn();
           }}
         >
@@ -68,7 +65,7 @@ class FileInfo extends Component {
                 value={props.values.name}
               />
               {props.errors.name && props.touched.name ? (
-                <span className={s.field_text}>{props.errors.name}</span>
+                <Error>{props.errors.name}</Error>
               ) : (
                 ''
               )}
@@ -130,6 +127,8 @@ class FileInfo extends Component {
 export default withModal(FileInfo)({});
 
 const Container = styled.div``;
+
+const Error = styled.div``;
 
 const Top = styled.div`
   width: 100%;

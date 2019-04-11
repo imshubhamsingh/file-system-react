@@ -1,35 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import styled from 'styled-components';
 import GoBack from './GoBack';
 
-export default class Navigation extends Component {
-  state = {
-    currentpath: 'root/movies/inception/'
-  };
+const showPath = path => {
+  const pathArr = path.split('/').filter(p => p);
+  const len = pathArr.length;
+  const arr = [<span key={0}>{` root `}</span>];
 
-  showPath(path) {
-    const pathArr = path.split('/').filter(p => p);
-    const len = pathArr.length;
-    return pathArr.map((p, _) => {
-      return _ === len - 1 ? (
-        <span className="currentPath" key={_}>
-          {p}
-        </span>
-      ) : (
-        <span key={_}>{` ${p} / `}</span>
-      );
-    });
-  }
+  pathArr.map((p, _) => {
+    _ === len - 1
+      ? arr.push(
+          <span className="currentPath" key={_ + 1}>
+            / {p}
+          </span>
+        )
+      : arr.push(<span key={_ + 1}>{` / ${p} `}</span>);
+  });
+  return arr;
+};
 
-  render() {
-    return (
-      <Container>
-        <GoBack fill="#545B61" style={{ marginTop: -2 }} />
-        <Path>{this.showPath(this.state.currentpath)}</Path>
-      </Container>
-    );
-  }
-}
+const goBack = path => {
+  let newPath = path.split('/');
+  newPath.splice(newPath.length - 1, 1);
+  return newPath.join('/');
+};
+
+const Navigation = props => {
+  return (
+    <Container>
+      <div
+        style={{ marginTop: -2, cursor: 'pointer' }}
+        onClick={() => {
+          props.history.push(goBack(props.location.pathname));
+        }}
+      >
+        <GoBack fill="#545B61" />
+      </div>
+      <Path>{showPath(props.location.pathname)}</Path>
+    </Container>
+  );
+};
+
+export default withRouter(Navigation);
 
 const Container = styled.div`
   width: 60%;

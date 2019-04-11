@@ -1,14 +1,14 @@
 @font-face {
   font-family: "Proxima Nova";
-  src: url("/37bed511b8a206ec7794ccc5b87adfae.eot");
-  src: url("/37bed511b8a206ec7794ccc5b87adfae.eot?#iefix") format("embedded-opentype"), url("/3674c47d3fb082c4853a30cb5403ad99.woff") format("woff"), url("/5cc807dfe95cd547b10ec3f84903bc0f.ttf") format("truetype"), url("/669dbc313ff0406e99aa084ccd45738d.svg#proxima_nova_altregular") format("svg");
+  src: url("/Proxima Nova Alt Regular-webfont.b87adfae.eot");
+  src: url("/Proxima Nova Alt Regular-webfont.b87adfae.eot?#iefix") format("embedded-opentype"), url("/Proxima Nova Alt Regular-webfont.5403ad99.woff") format("woff"), url("/Proxima Nova Alt Regular-webfont.4903bc0f.ttf") format("truetype"), url("/Proxima Nova Alt Regular-webfont.cd45738d.svg#proxima_nova_altregular") format("svg");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Lato";
-  src: url("/9b585a3fc185f9bad157bec7bc92d0c1.eot");
-  src: url("/9b585a3fc185f9bad157bec7bc92d0c1.eot?#iefix") format("embedded-opentype"), url("/6022937d04ddbfd71eb86959ae43e50b.woff2") format("woff2"), url("/af6780023777df17b2f0ebf8319d6442.woff") format("woff"), url("/dc3426ddc6a5324c39450217ee296922.ttf") format("truetype");
+  src: url("/lato-regular.bc92d0c1.eot");
+  src: url("/lato-regular.bc92d0c1.eot?#iefix") format("embedded-opentype"), url("/lato-regular.ae43e50b.woff2") format("woff2"), url("/lato-regular.319d6442.woff") format("woff"), url("/lato-regular.ee296922.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }

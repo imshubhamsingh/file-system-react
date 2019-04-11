@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 import MagnifyIcon from './MagnifyIcon';
 import SearchResults from './SearchResults';
@@ -85,7 +86,7 @@ export default class SearchBar extends Component {
             position: 'absolute',
             pointerEvents: 'none',
             left: 9,
-            marginTop: 8
+            marginTop: 5
           }}
           size={15}
         />

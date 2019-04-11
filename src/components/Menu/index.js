@@ -7,7 +7,12 @@ export default class Menu extends Component {
     return (
       <Container style={this.props.style}>
         {this.props.content.map(c => (
-          <div className="content" style={c.style} onClick={c.onClick}>
+          <div
+            key={c.info}
+            className="content"
+            style={c.style}
+            onClick={c.onClick}
+          >
             {c.info}
           </div>
         ))}

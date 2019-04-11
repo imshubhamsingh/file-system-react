@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
+import { FOLDER } from '@Utils/constants';
 
 import FileIcon from '@Image/file.png';
 import FolderIcon from '@Image/folder.png';
+
 import Menu from '../Menu';
 import FileInfo from '../FileInfo';
 
@@ -138,6 +141,45 @@ class Icon extends Component {
       });
   };
 
+  handleDelete = () => {
+    this.props.deleteFn();
+  };
+
+  enterFolder = () => {
+    if (this.props.entry.type === FOLDER)
+      this.props.history.push(this.props.entry.path);
+  };
+
+  _rightClickMenuContent = () => {
+    const arr =
+      this.props.entry.type === FOLDER
+        ? [
+            {
+              info: 'Open',
+              onClick: () => {
+                this.props.history.push(this.props.entry.path);
+              }
+            }
+          ]
+        : [];
+    arr.push({
+      info: 'Get Info',
+      onClick: () =>
+        this.setState({
+          showInfo: true
+        })
+    });
+    arr.push({
+      info: 'Delete',
+      style: { color: 'red' },
+      onClick: () => {
+        this.handleDelete();
+      }
+    });
+    console.log(arr);
+    return arr;
+  };
+
   render() {
     const { entry } = this.props;
     let ext = entry.name.split('.').filter(el => el);
@@ -145,7 +187,7 @@ class Icon extends Component {
 
     return (
       <Container ref={this.nodeRef}>
-        <Logo>
+        <Logo onClick={() => this.enterFolder()}>
           <Img src={entry.type == 'file' ? FileIcon : FolderIcon} />
           {entry.type == 'file' ? <span>{`.${ext}`}</span> : ''}
         </Logo>
@@ -153,23 +195,7 @@ class Icon extends Component {
         {this.state.visible && (
           <Menu
             style={this.state.style}
-            content={[
-              { info: 'Open', onClick: () => console.log('open') },
-              {
-                info: 'Get Info',
-                onClick: () =>
-                  this.setState({
-                    showInfo: true
-                  })
-              },
-              {
-                info: 'Delete',
-                style: { color: 'red' },
-                onClick: () => {
-                  console.log('delete');
-                }
-              }
-            ]}
+            content={this._rightClickMenuContent()}
           />
         )}
         {this.state.showInfo ? (
@@ -199,7 +225,7 @@ class Icon extends Component {
   }
 }
 
-export default Icon;
+export default withRouter(Icon);
 
 const Container = styled.div`
   height: 117px;

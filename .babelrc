@@ -15,7 +15,9 @@
           "@Styles": "./src/assets/styles",
           "@Utils": "./src/utils",
           "@HOC": "./src/hoc",
-          "@Image": "./src/assets/img"
+          "@Image": "./src/assets/img",
+          "@Reducer": "./src/reducers",
+          "@Action": "./src/actions"
         }
       }
     ]
