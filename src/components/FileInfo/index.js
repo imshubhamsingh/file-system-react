@@ -82,6 +82,6 @@ class FileInfo extends Component {
 export default withModal(FileInfo)({
   style: {
     position: 'absolute',
-    zIndex: 200
+    zIndex: 4000
   }
 });

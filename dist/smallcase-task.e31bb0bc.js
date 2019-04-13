@@ -37794,7 +37794,7 @@ exports.default = _default;
 var Container = _styledComponents.default.div.withConfig({
   displayName: "Modal__Container",
   componentId: "kotl87-0"
-})(["width:316px;position:relative;padding:20px 0 44px;background:#ffffff;border:1px solid rgba(221,224,228,0.7);box-shadow:0 16px 64px 0 rgba(0,0,0,0.08);border-radius:8px;"]);
+})(["width:316px;position:relative;z-index:4000;padding:20px 0 44px;background:#ffffff;border:1px solid rgba(221,224,228,0.7);box-shadow:0 16px 64px 0 rgba(0,0,0,0.08);border-radius:8px;"]);
 
 var Title = _styledComponents.default.div.withConfig({
   displayName: "Modal__Title",
@@ -37950,7 +37950,7 @@ function (_Component) {
 var _default = (0, _Modal.default)(FileInfo)({
   style: {
     position: 'absolute',
-    zIndex: 200
+    zIndex: 4000
   }
 });
 
@@ -46187,22 +46187,15 @@ function (_Component) {
     value: function componentDidMount() {
       var _this = this;
 
+      console.log(this.props);
+
       if (this.props.fileSystem.find(function (el) {
-        return el === _this.props.match.url;
+        return el.path === _this.props.location.pathname;
       }) === undefined) {
         this.props.history.push('/');
       }
 
       console.log('hii');
-    }
-  }, {
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (nextProps.match.url !== this.props.match.url) {
-        return true;
-      }
-
-      return false;
     }
   }, {
     key: "render",
@@ -46412,7 +46405,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59129" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65402" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

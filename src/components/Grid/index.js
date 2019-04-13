@@ -14,20 +14,15 @@ import FolderIcon from '@Image/folder.png';
 
 class Grid extends Component {
   componentDidMount() {
+    console.log(this.props);
     if (
-      this.props.fileSystem.find(el => el === this.props.match.url) ===
-      undefined
+      this.props.fileSystem.find(
+        el => el.path === this.props.location.pathname
+      ) === undefined
     ) {
       this.props.history.push('/');
     }
     console.log('hii');
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.match.url !== this.props.match.url) {
-      return true;
-    }
-    return false;
   }
 
   render() {

@@ -99,6 +99,7 @@ export default withModal;
 const Container = styled.div`
   width: 316px;
   position: relative;
+  z-index: 4000;
   padding: 20px 0 44px;
   background: #ffffff;
   border: 1px solid rgba(221, 224, 228, 0.7);
