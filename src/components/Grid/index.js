@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import SEO from '@Components/SEO';
 
-import { showPathEntries } from '@Utils/fileSystem';
+import { showPathEntries, entriesAreSame } from '@Utils/fileSystem';
 import { addEntry, deleteEntry } from '@Action/fileSystem';
 
 import Icon from '../Icon';
@@ -21,6 +21,13 @@ class Grid extends Component {
     ) {
       this.props.history.push('/');
     }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!entriesAreSame(this.props.entry, nextProps.location.pathname)) {
+      return true;
+    }
+    return false;
   }
 
   render() {
