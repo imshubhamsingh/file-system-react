@@ -1,81 +1,39 @@
-import React, { Component, createRef } from 'react';
-import styled from 'styled-components';
+import React, { Component, createRef, Fragment } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { LOCAL } from '@Utils/constants';
+import { showPathEntries } from '@Utils/fileSystem';
 
 import MagnifyIcon from './MagnifyIcon';
 import SearchResults from './SearchResults';
+import Filter from './filter';
 
-const initialData = [
-  {
-    type: 'folder',
-    name: 'apps',
-    path: '/apps',
-    size: 123,
-    createdAt: '2019-04-07',
-    creatorName: 'Shubham Singh',
-    parent: '/'
-  },
-  {
-    type: 'folder',
-    name: 'picture',
-    path: '/picture',
-    size: 123,
-    creatorName: 'Shubham Singh',
-    createdAt: '2019-04-07'
-  },
-  {
-    type: 'folder',
-    name: 'videos',
-    path: '/videos',
-    size: 123,
-    createdAt: '2019-04-07',
-    creatorName: 'Shubham Singh',
-    children: [
-      {
-        type: 'file',
-        name: 'a.docx',
-        path: '/',
-        ext: 'docxdffdsfd',
-        size: 123,
-        createdAt: '2019-04-07',
-        creatorName: 'Shubham Singh'
-      }
-    ]
-  },
-  {
-    type: 'file',
-    name: 'a.docx',
-    path: '/',
-    ext: 'docxdffdsfd',
-    size: 123,
-    createdAt: '2019-04-07',
-    creatorName: 'Shubham Singh'
-  },
-  {
-    type: 'file',
-    name: 'a.docx',
-    path: '/',
-    ext: 'docxdffdsfd',
-    size: 123,
-    createdAt: '2019-04-07',
-    creatorName: 'Shubham Singh'
-  }
-];
-export default class SearchBar extends Component {
+import { Container, Line, Input } from './styles';
+
+class SearchBar extends Component {
   _ref = createRef();
   state = {
     term: '',
-    width: 0
+    width: 0,
+    mode: LOCAL,
+    data: null
   };
 
   componentDidMount() {
-    this.setState(prevState => {
+    this.setState(() => {
       const { width } = getComputedStyle(this._ref.current);
       return {
         width
       };
     });
   }
+
+  handleMode = mode => {
+    this.setState({
+      mode
+    });
+  };
 
   render() {
     return (
@@ -96,12 +54,21 @@ export default class SearchBar extends Component {
           onChange={event => this.setState({ term: event.target.value })}
         />
         {this.state.term.length > 0 ? (
-          <SearchResults
-            style={{ width: this.state.width }}
-            term={this.state.term}
-            isDraggable={false}
-            data={initialData}
-          />
+          <Container style={{ width: this.state.width }}>
+            <Filter mode={this.state.mode} handleMode={this.handleMode} />
+            <Line />
+            <SearchResults
+              style={{ width: this.state.width }}
+              term={this.state.term}
+              isDraggable={false}
+              data={
+                this.state.mode === LOCAL
+                  ? this.props.entry
+                  : this.props.fileSystem
+              }
+              closeResult={() => this.setState({ term: '' })}
+            />
+          </Container>
         ) : (
           ''
         )}
@@ -110,28 +77,12 @@ export default class SearchBar extends Component {
   }
 }
 
-const Input = styled.div`
-  margin-top: -6px;
-  width: 40%;
-  position: relative;
-  height: 32px;
-  display: flex;
-  border-radius: 8px;
-  border: 1px solid #dde0e4;
-  padding: 0 8px;
-  font-family: Lato, sans-serif;
-  outline: none;
-  input {
-    border: 0;
-    width: 100%;
-    font-size: 15px;
-    padding: 0 0 0 23px;
-    & ::placeholder {
-      color: #afb2b6;
-    }
-  }
-  @media screen and (max-width: 768px) {
-    width: 100%;
-    margin-top: 20px;
-  }
-`;
+const mapStateToProps = (state, ownProps) => {
+  const path = ownProps.location.pathname;
+  return {
+    entry: showPathEntries(path, state.fileSystem),
+    fileSystem: state.fileSystem
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(SearchBar));

@@ -1,46 +1,60 @@
-import { FOLDER, ADD_ENTRY, DELETE_ENTRY } from './constants';
+import { FOLDER } from './constants';
 
-const updateFileSystem = (action, entry, fileSystem = {}) => {
-  let updatedFileSystem = fileSystem;
-  if (action === ADD_ENTRY) {
-    updatedFileSystem.push(entry);
-  }
-
-  if (action === DELETE_ENTRY) {
-    updatedFileSystem.filter(node => node.path !== entry);
-  }
-
-  return updatedFileSystem;
+const search = (arr, entry) => {
+  let no = 0;
+  arr.forEach(element => {
+    if (element.name.includes(entry.name) && element.type === entry.type) {
+      no++;
+    }
+  });
+  return no;
 };
 
-export const AddEntry = (entry, fileSystem = {}) => {
-  const { type, name, path, size, createdAt, creatorName, parentPath } = entry;
-  const newEntry = {
-    type,
-    name,
-    path,
-    size,
-    createdAt,
-    creatorName,
-    parentPath
-  };
+export const AddEntry = (data, newEntry) => {
+  let no = search(data, newEntry);
+  if (no > 0) {
+    newEntry.name = `${newEntry.name}_${no}`;
+  }
+  newEntry.path =
+    newEntry.parentPath === '/'
+      ? `${newEntry.parentPath}${newEntry.name}`
+      : `${newEntry.parentPath} / ${newEntry.name}`;
 
-  if (type === FOLDER) {
+  if (newEntry.type === FOLDER) {
     newEntry.children = [];
   }
 
-  return updateFileSystem(ADD_ENTRY, newEntry, fileSystem);
+  let newData = [...data, newEntry];
+  localStorage.setItem('fileSystem', JSON.stringify(newData));
+
+  return newData;
 };
 
-export const DeleteEntry = (entryPath, fileSystem = {}) => {
-  return updateFileSystem(DELETE_ENTRY, entryPath, fileSystem);
+export const DeleteEntry = (data, path) => {
+  let afterDelete = data.filter(node => {
+    return !node.path.includes(path);
+  });
+
+  localStorage.setItem('fileSystem', JSON.stringify(afterDelete));
+
+  return afterDelete;
 };
 
-export const generateTreeFromList = list => {
+export const generateTreeFromList = _list => {
   const root = [];
   const map = {};
 
-  list.forEach(node => {
+  var list = []; // create empty array to hold copy
+
+  for (var i = 0, len = _list.length; i < len; i++) {
+    list[i] = {}; // empty object to hold properties added below
+    for (var prop in _list[i]) {
+      list[i][prop] = _list[i][prop]; // copy properties from arObj to ar2
+    }
+  }
+
+  list = list.filter(el => el.type === FOLDER);
+  list.forEach((node, index) => {
     if (!node.parentPath) return root.push(node);
 
     let parentIndex = map[node.parentPath];

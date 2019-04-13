@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
+import React, { Component, createRef } from 'react';
 import { withRouter } from 'react-router-dom';
-import { FOLDER } from '@Utils/constants';
+import { FILE, FOLDER } from '@Utils/constants';
 
 import FileIcon from '@Image/file.png';
 import FolderIcon from '@Image/folder.png';
 
+import { Container, Logo, Img, Name } from './styles';
 import Menu from '../Menu';
 import FileInfo from '../FileInfo';
 
 class Icon extends Component {
-  nodeRef = React.createRef();
+  nodeRef = createRef();
 
   state = {
     visible: false,
@@ -150,52 +150,48 @@ class Icon extends Component {
       this.props.history.push(this.props.entry.path);
   };
 
-  _rightClickMenuContent = () => {
-    const arr =
-      this.props.entry.type === FOLDER
-        ? [
-            {
-              info: 'Open',
-              onClick: () => {
-                this.props.history.push(this.props.entry.path);
-              }
-            }
-          ]
-        : [];
-    arr.push({
-      info: 'Get Info',
-      onClick: () =>
-        this.setState({
-          showInfo: true
-        })
-    });
-    arr.push({
-      info: 'Delete',
-      style: { color: 'red' },
-      onClick: () => {
-        this.handleDelete();
-      }
-    });
-    console.log(arr);
-    return arr;
-  };
-
   render() {
     const { entry } = this.props;
     let ext = entry.name.split('.').filter(el => el);
-    ext = ext[ext.length - 1];
+
+    ext = ext.length >= 2 ? ext[ext.length - 1] : '';
 
     return (
       <Container ref={this.nodeRef}>
         <Logo onClick={() => this.enterFolder()}>
-          <Img src={entry.type == 'file' ? FileIcon : FolderIcon} />
-          {entry.type == 'file' ? <span>{`.${ext}`}</span> : ''}
+          <Img src={entry.type == FILE ? FileIcon : FolderIcon} />
+          {entry.type == FILE ? <span>{`.${ext}`}</span> : ''}
         </Logo>
         <Name>{entry.name}</Name>
         {this.state.visible && (
           <Menu
             style={this.state.style}
-            content={this._rightClickMenuContent()}
+            content={[
+              {
+                info: 'Open',
+                onClick: () => {
+                  entry.type === FOLDER
+                    ? this.props.history.push(this.props.entry.path)
+                    : this.setState({
+                        showInfo: true
+                      });
+                }
+              },
+              {
+                info: 'Get Info',
+                onClick: () =>
+                  this.setState({
+                    showInfo: true
+                  })
+              },
+              {
+                info: 'Delete',
+                style: { color: 'red' },
+                onClick: () => {
+                  this.handleDelete();
+                }
+              }
+            ]}
           />
         )}
         {this.state.showInfo ? (
@@ -226,43 +222,3 @@ class Icon extends Component {
 }
 
 export default withRouter(Icon);
-
-const Container = styled.div`
-  height: 117px;
-  width: 96px;
-  display: flex;
-  cursor: pointer;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  font-family: Lato, sans-serif;
-  font-weight: lighter;
-  color: #535b62;
-  margin-bottom: 22px;
-  padding: 8px 7px 10px 10px;
-  border-radius: 8px;
-  transition: background 230ms ease-in;
-  &:hover {
-    background: #e6f5ff;
-  }
-`;
-
-const Logo = styled.div`
-  position: relative;
-  & span {
-    position: absolute;
-    bottom: 7px;
-    left: 4px;
-    width: 96%;
-    font-weight: bold;
-    color: white;
-    font-size: 12px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-`;
-
-const Img = styled.img``;
-
-const Name = styled.div``;

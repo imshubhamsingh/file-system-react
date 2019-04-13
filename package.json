@@ -15,11 +15,12 @@
     "reac": "^0.0.0",
     "react": ">=15",
     "react-dom": "^16.7.0-alpha.2",
+    "react-helmet": "^5.2.0",
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
-    "styled-components": "^4.1.1",
-    "yup": "^0.27.0"
+    "spected": "^0.7.0",
+    "styled-components": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",

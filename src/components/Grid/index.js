@@ -1,6 +1,8 @@
-import React, { Component, createRef } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
+import SEO from '@Components/SEO';
 
 import { showPathEntries } from '@Utils/fileSystem';
 import { addEntry, deleteEntry } from '@Action/fileSystem';
@@ -8,11 +10,35 @@ import { addEntry, deleteEntry } from '@Action/fileSystem';
 import Icon from '../Icon';
 import Add from '../Add';
 
+import FolderIcon from '@Image/folder.png';
+
 class Grid extends Component {
-  nodeRef = createRef();
+  componentDidMount() {
+    if (
+      this.props.fileSystem.find(el => el === this.props.match.url) ===
+      undefined
+    ) {
+      this.props.history.push('/');
+    }
+    console.log('hii');
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (nextProps.match.url !== this.props.match.url) {
+      return true;
+    }
+    return false;
+  }
+
   render() {
     return (
       <Container>
+        <SEO
+          url={this.props.match.url}
+          title={this.props.match.url}
+          image={FolderIcon}
+          description={this.props.match.url}
+        />
         {this.props.entry.map((entry, _) => (
           <Icon
             entry={entry}
@@ -38,9 +64,9 @@ class Grid extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   const path = ownProps.match.url;
-  console.log(state.fileSystem);
   return {
-    entry: showPathEntries(path, state.fileSystem)
+    entry: showPathEntries(path, state.fileSystem),
+    fileSystem: state.fileSystem
   };
 };
 

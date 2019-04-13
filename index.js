@@ -1,21 +1,41 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
+import { BrowserRouter } from 'react-router-dom';
+import Sidebar from '@Components/Sidebar';
+
+import '@Styles/App.scss';
+
 import reducers from '@Reducer';
-import { FileSystem } from '@Pages';
+import { ViewFiles } from '@Pages';
+
+import dummyFileSystem from '@Utils/dummyFileSystem';
 
 const rootEl = document.getElementById('root');
 
-const store = createStore(reducers, composeWithDevTools());
+const store = createStore(
+  reducers,
+  {
+    fileSystem: localStorage.getItem('fileSystem')
+      ? [...JSON.parse(localStorage.getItem('fileSystem'))]
+      : dummyFileSystem
+  },
+  composeWithDevTools()
+);
 
 const App = () => (
   <Provider store={store}>
     <Router>
-      <FileSystem />
+      <BrowserRouter>
+        <Fragment>
+          <Sidebar />
+          <ViewFiles />
+        </Fragment>
+      </BrowserRouter>
     </Router>
   </Provider>
 );

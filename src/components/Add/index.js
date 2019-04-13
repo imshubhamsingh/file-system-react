@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, memo } from 'react';
 import styled from 'styled-components';
 import CreateNew from '../CreateNew';
 
-export default function Add(props) {
+function Add(props) {
   const [open, handleOpen] = useState(false);
   return (
     <Fragment>
@@ -19,6 +19,8 @@ export default function Add(props) {
     </Fragment>
   );
 }
+
+export default memo(Add);
 
 const Container = styled.div`
   height: 109px;

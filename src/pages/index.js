@@ -1,2 +1,3 @@
-import FileSystem from './FileSystem';
-export { FileSystem };
+import ViewFiles from './ViewFiles';
+
+export { ViewFiles };

@@ -1,20 +1,34 @@
-import styled from 'styled-components';
+import styled, { className } from 'styled-components';
 
 export const SideBarContainer = styled.section`
   background: #f9fafc;
   width: 320px;
-  height: 100vh;
+  height: 100%;
   position: absolute;
+  & .rootLink {
+    text-decoration: none;
+  }
   transition: margin-left 250ms ease-in;
   @media screen and (max-width: 768px) {
     margin-left: -320px;
   }
 `;
 
+export const ShowMenu = styled.div`
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  color: red;
+`;
+
 export const Root = styled.div`
   font-family: Lato, sans-serif;
   font-weight: bolder;
   padding: 32px;
+  text-decoration: none;
   color: #afb2b6;
   &::after {
     content: 'Root';
@@ -41,6 +55,10 @@ export const LinkContainer = styled.div`
     margin-top: -22px;
     justify-content: center;
     align-items: center;
+  }
+
+  &.selected {
+    background: #eeeff1;
   }
 
   &:hover {

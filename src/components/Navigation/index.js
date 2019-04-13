@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import styled from 'styled-components';
+import { Container, Path } from './styles';
 import GoBack from './GoBack';
 
 const showPath = path => {
@@ -36,7 +36,9 @@ const Navigation = props => {
           props.history.push(goBack(props.location.pathname));
         }}
       >
-        <GoBack fill="#545B61" />
+        <GoBack
+          fill={props.location.pathname === '/' ? '#acb9c3' : '#545B61'}
+        />
       </div>
       <Path>{showPath(props.location.pathname)}</Path>
     </Container>
@@ -44,28 +46,3 @@ const Navigation = props => {
 };
 
 export default withRouter(Navigation);
-
-const Container = styled.div`
-  width: 60%;
-  display: flex;
-  @media screen and (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const Path = styled.p`
-  font-family: 'Proxima Nova', sans-serif;
-  font-size: 24px;
-  color: #81878c;
-  font-weight: lighter;
-  margin: -6px 0px 0px 28px;
-  word-spacing: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  direction: rtl;
-
-  & .currentPath {
-    color: #001800;
-  }
-`;
