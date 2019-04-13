@@ -18,7 +18,7 @@ export const AddEntry = (data, newEntry) => {
   newEntry.path =
     newEntry.parentPath === '/'
       ? `${newEntry.parentPath}${newEntry.name}`
-      : `${newEntry.parentPath} / ${newEntry.name}`;
+      : `${newEntry.parentPath}/${newEntry.name}`;
 
   if (newEntry.type === FOLDER) {
     newEntry.children = [];
