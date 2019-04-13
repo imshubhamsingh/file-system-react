@@ -5,23 +5,31 @@ export const SideBarContainer = styled.section`
   width: 320px;
   height: 100%;
   position: absolute;
+  z-index: 2000;
   & .rootLink {
     text-decoration: none;
   }
   transition: margin-left 250ms ease-in;
   @media screen and (max-width: 768px) {
-    margin-left: -320px;
+    margin-left: ${props => (props.toggle ? '-320px' : '0')};
   }
 `;
 
 export const ShowMenu = styled.div`
-  width: 200px;
-  height: 200px;
+  width: 34px;
+  height: 27px;
   position: absolute;
-  top: 0;
-  right: 0;
-
-  color: red;
+  top: 10px;
+  right: -28px;
+  background: linear-gradient(to right, #f9fafc, #acb9c3);
+  border-radius: 3px;
+  box-shadow: 5px 0px 0px #888888;
+  display: none;
+  z-index: 2000;
+  cursor: pointer;
+  @media screen and (max-width: 768px) {
+    display: block;
+  }
 `;
 
 export const Root = styled.div`
