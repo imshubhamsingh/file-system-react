@@ -95,8 +95,21 @@ export const Bar = styled.div`
 `;
 
 export const CollapseContainer = styled.div`
+  position: relative;
   &::after {
     content: '';
     position: absolute;
+  }
+`;
+
+export const Line = styled.div`
+  &::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: black;
+    height: 17px;
+    left: 40px;
+    top: 8px;
   }
 `;

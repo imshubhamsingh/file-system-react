@@ -42,7 +42,7 @@ class Grid extends Component {
           <Icon
             entry={entry}
             index={_}
-            key={entry.path}
+            key={`${entry.path}_${entry.type}`}
             deleteFn={() => {
               this.props.deleteEntry(entry.path);
             }}

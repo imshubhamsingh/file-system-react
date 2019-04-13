@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { FILE } from '@Utils/constants';
 import Collapse from './Collapse';
 
-import { LinkContainer, DropDownIcon } from './styles';
+import { LinkContainer, DropDownIcon, Line } from './styles';
 
 class SideMenu extends Component {
   state = {
@@ -67,7 +67,9 @@ class SideMenu extends Component {
                     <DropDownIcon className={visible ? '' : 'clicked'} />
                   </div>
                 </LinkContainer>
-                <div>{visible ? this.handler(entry.children, i) : ''}</div>
+                <div style={{ position: 'relative' }}>
+                  {visible ? this.handler(entry.children, i) : ''}
+                </div>
               </Fragment>
             );
           }}

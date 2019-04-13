@@ -4,8 +4,6 @@ import withModal from '@Elements/Modal';
 
 import { FILE, FOLDER } from '@Utils/constants';
 
-import { validate, getValidationSchema } from './validate';
-
 import { Container, Error, Top, Toggle, Form } from './styles';
 
 const TodayDate = () => {
@@ -49,8 +47,17 @@ function FileInfo(_props) {
           size: 0,
           date: TodayDate()
         }}
-        validate={validate(getValidationSchema)}
+        validate={values => {
+          let errors = {};
+          if (!values.name) {
+            errors.name = 'Name is Required';
+          } else if (!values.creatorName) {
+            errors.creatorName = 'Creator Name is Required';
+          }
+          return errors;
+        }}
         onSubmit={(values, actions) => {
+          console.log(values);
           _props.addEntry({
             ...values,
             type
@@ -116,7 +123,9 @@ function FileInfo(_props) {
             <Form.Submit
               type="submit"
               disabled={!props.dirty && !props.isSubmitting}
-              className={!props.dirty && !props.isSubmitting ? 'disabled' : ''}
+              className={
+                !props.dirty && !props.isSubmitting > 0 ? 'disabled' : ''
+              }
               onClick={props.handleSubmit}
             >
               Create

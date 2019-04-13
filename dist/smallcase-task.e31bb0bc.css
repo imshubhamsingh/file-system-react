@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Proxima Nova";
+  src: url("/Proxima Nova Alt Regular-webfont.b87adfae.eot");
+  src: url("/Proxima Nova Alt Regular-webfont.b87adfae.eot?#iefix") format("embedded-opentype"), url("/Proxima Nova Alt Regular-webfont.5403ad99.woff") format("woff"), url("/Proxima Nova Alt Regular-webfont.4903bc0f.ttf") format("truetype"), url("/Proxima Nova Alt Regular-webfont.cd45738d.svg#proxima_nova_altregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Lato";
+  src: url("/lato-regular.bc92d0c1.eot");
+  src: url("/lato-regular.bc92d0c1.eot?#iefix") format("embedded-opentype"), url("/lato-regular.ae43e50b.woff2") format("woff2"), url("/lato-regular.319d6442.woff") format("woff"), url("/lato-regular.ee296922.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-touch-callout: none;
+  -webkit-text-size-adjust: none;
+  user-select: none;
+}
+
+*:focus,
+textarea:focus,
+input:focus,
+button:focus {
+  outline: none;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+/*# sourceMappingURL=/smallcase-task.e31bb0bc.css.map */
