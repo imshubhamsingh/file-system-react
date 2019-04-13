@@ -23,12 +23,6 @@ class Grid extends Component {
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.location.pathname !== nextProps.location.pathname)
-      return true;
-    return false;
-  }
-
   render() {
     return (
       <Container>

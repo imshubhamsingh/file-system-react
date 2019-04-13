@@ -1,4 +1,4 @@
-import { FOLDER } from './constants';
+import { FOLDER, FILE } from './constants';
 
 const search = (arr, entry) => {
   let no = 0;
@@ -13,7 +13,13 @@ const search = (arr, entry) => {
 export const AddEntry = (data, newEntry) => {
   let no = search(data, newEntry);
   if (no > 0) {
-    newEntry.name = `${newEntry.name}_${no}`;
+    if (newEntry.type === FILE) {
+      let temp = newEntry.name.split('.');
+      temp[temp.length - 2] = `${temp[temp.length - 2]}_${no}`;
+      newEntry.name = temp.join('.');
+    } else {
+      newEntry.name = `${newEntry.name}_${no}`;
+    }
   }
   newEntry.path =
     newEntry.parentPath === '/'

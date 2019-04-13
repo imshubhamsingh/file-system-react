@@ -35452,7 +35452,13 @@ var AddEntry = function AddEntry(data, newEntry) {
   var no = search(data, newEntry);
 
   if (no > 0) {
-    newEntry.name = "".concat(newEntry.name, "_").concat(no);
+    if (newEntry.type === _constants.FILE) {
+      var temp = newEntry.name.split('.');
+      temp[temp.length - 2] = "".concat(temp[temp.length - 2], "_").concat(no);
+      newEntry.name = temp.join('.');
+    } else {
+      newEntry.name = "".concat(newEntry.name, "_").concat(no);
+    }
   }
 
   newEntry.path = newEntry.parentPath === '/' ? "".concat(newEntry.parentPath).concat(newEntry.name) : "".concat(newEntry.parentPath, " / ").concat(newEntry.name);
@@ -44707,8 +44713,6 @@ function FileInfo(_props) {
       return errors;
     },
     onSubmit: function onSubmit(values, actions) {
-      console.log(values);
-
       _props.addEntry((0, _objectSpread2.default)({}, values, {
         type: type
       }));
@@ -44874,12 +44878,6 @@ function (_Component) {
       }) === undefined) {
         this.props.history.push('/');
       }
-    }
-  }, {
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(nextProps, nextState) {
-      if (this.props.location.pathname !== nextProps.location.pathname) return true;
-      return false;
     }
   }, {
     key: "render",
@@ -45089,7 +45087,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54202" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56203" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

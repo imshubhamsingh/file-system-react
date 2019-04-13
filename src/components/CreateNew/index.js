@@ -57,7 +57,6 @@ function FileInfo(_props) {
           return errors;
         }}
         onSubmit={(values, actions) => {
-          console.log(values);
           _props.addEntry({
             ...values,
             type
