@@ -1,6 +1,6 @@
 import dummyFileSystem from '@Utils/dummyFileSystem';
 
-import { ADD_ENTRY, DELETE_ENTRY, FOLDER } from '@Utils/constants';
+import { ADD_ENTRY, DELETE_ENTRY } from '@Utils/constants';
 import { DeleteEntry, AddEntry } from '@Utils/fileSystem';
 
 export default (data = dummyFileSystem, action) => {
