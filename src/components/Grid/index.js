@@ -24,7 +24,7 @@ class Grid extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (!entriesAreSame(this.props.entry, nextProps.location.pathname)) {
+    if (!entriesAreSame(this.props.entry, nextProps.entry)) {
       return true;
     }
     return false;

@@ -44918,7 +44918,7 @@ function (_Component) {
   }, {
     key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(nextProps, nextState) {
-      if (!(0, _fileSystem.entriesAreSame)(this.props.entry, nextProps.location.pathname)) {
+      if (!(0, _fileSystem.entriesAreSame)(this.props.entry, nextProps.entry)) {
         return true;
       }
 
