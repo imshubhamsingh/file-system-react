@@ -209,7 +209,7 @@ class Icon extends Component {
               path: '/',
               ext: ext,
               size: entry.size,
-              createdAt: entry.createdAt,
+              date: entry.date,
               creatorName: entry.creatorName
             }}
           />

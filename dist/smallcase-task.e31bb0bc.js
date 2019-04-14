@@ -38028,7 +38028,7 @@ function (_Component) {
       ext = ext[ext.length - 1];
       return _react.default.createElement(_react.Fragment, null, _react.default.createElement(_styles.Icon, null, _react.default.createElement(_styles.Logo, null, _react.default.createElement(_styles.Img, {
         src: entry.type == 'file' ? _file.default : _folder.default
-      }), entry.type == 'file' ? _react.default.createElement("span", null, ".".concat(ext)) : '')), _react.default.createElement(_styles.Details.Container, null, _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Name:"), _react.default.createElement(_styles.Details.Value, null, entry.name)), _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Size:"), _react.default.createElement(_styles.Details.Value, null, entry.size, "kb")), _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Creator Name:"), _react.default.createElement(_styles.Details.Value, null, entry.creatorName)), _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Created Date:"), _react.default.createElement(_styles.Details.Value, null, formatDate(entry.createdAt)))));
+      }), entry.type == 'file' ? _react.default.createElement("span", null, ".".concat(ext)) : '')), _react.default.createElement(_styles.Details.Container, null, _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Name:"), _react.default.createElement(_styles.Details.Value, null, entry.name)), _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Size:"), _react.default.createElement(_styles.Details.Value, null, entry.size, "kb")), _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Creator Name:"), _react.default.createElement(_styles.Details.Value, null, entry.creatorName)), _react.default.createElement(_styles.Details.Info, null, _react.default.createElement(_styles.Details.Label, null, "Created Date:"), _react.default.createElement(_styles.Details.Value, null, formatDate(entry.date)))));
     }
   }]);
   return FileInfo;
@@ -38283,7 +38283,7 @@ function (_Component) {
           path: '/',
           ext: ext,
           size: entry.size,
-          createdAt: entry.createdAt,
+          date: entry.date,
           creatorName: entry.creatorName
         }
       }) : '');
@@ -45166,7 +45166,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53950" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59734" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

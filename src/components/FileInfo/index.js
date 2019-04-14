@@ -71,7 +71,7 @@ class FileInfo extends Component {
           </Details.Info>
           <Details.Info>
             <Details.Label>Created Date:</Details.Label>
-            <Details.Value>{formatDate(entry.createdAt)}</Details.Value>
+            <Details.Value>{formatDate(entry.date)}</Details.Value>
           </Details.Info>
         </Details.Container>
       </Fragment>
