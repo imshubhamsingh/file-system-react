@@ -17,7 +17,6 @@ const search = (arr, entry) => {
 
 export const AddEntry = (data, newEntry) => {
   let no = search(data, newEntry);
-  console.log(no);
   if (no > 0) {
     if (newEntry.type === FILE) {
       let temp = newEntry.name.split('.');
@@ -33,13 +32,11 @@ export const AddEntry = (data, newEntry) => {
   newEntry.path =
     newEntry.parentPath === '/'
       ? `${newEntry.parentPath}${newEntry.name}`
-      : `${newEntry.parentPath} / ${newEntry.name}`;
+      : `${newEntry.parentPath}/${newEntry.name}`;
 
   if (newEntry.type === FOLDER) {
     newEntry.children = [];
   }
-
-  console.log(newEntry);
 
   let newData = [...data, newEntry];
   localStorage.setItem('fileSystem', JSON.stringify(newData));
@@ -105,6 +102,5 @@ export const entriesAreSame = (x, y) => {
       break;
     }
   }
-  console.log(objectsAreSame);
   return objectsAreSame;
 };

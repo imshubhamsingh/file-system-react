@@ -4,7 +4,7 @@ const dummyFileSystem = [
     name: 'root',
     path: '/',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'admin',
     parentPath: null
   },
@@ -13,7 +13,7 @@ const dummyFileSystem = [
     name: 'picture',
     path: '/picture',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/'
   },
@@ -22,7 +22,7 @@ const dummyFileSystem = [
     name: 'videos',
     path: '/videos',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/'
   },
@@ -31,7 +31,7 @@ const dummyFileSystem = [
     name: 'apps',
     path: '/apps',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/'
   },
@@ -40,7 +40,7 @@ const dummyFileSystem = [
     name: 'docs',
     path: '/docs',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/'
   },
@@ -49,7 +49,7 @@ const dummyFileSystem = [
     name: 'a.pdf',
     path: '/a.pdf',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/'
   },
@@ -58,7 +58,7 @@ const dummyFileSystem = [
     name: 'b.jpg',
     path: '/b.jpg',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/'
   },
@@ -67,7 +67,7 @@ const dummyFileSystem = [
     name: 'works',
     path: '/docs/works',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/docs'
   },
@@ -76,7 +76,7 @@ const dummyFileSystem = [
     name: 'c.jpg',
     path: '/docs/b.jpg',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/docs'
   },
@@ -85,7 +85,7 @@ const dummyFileSystem = [
     name: 'd.docx',
     path: '/docs/d.docx',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/docs'
   },
@@ -94,7 +94,7 @@ const dummyFileSystem = [
     name: 'e.pdf',
     path: '/docs/works/e.pdf',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/docs/works'
   },
@@ -103,7 +103,7 @@ const dummyFileSystem = [
     name: 'f.ts',
     path: '/docs/works/f.ts',
     size: 0,
-    createdAt: '2019-04-07',
+    date: '2019-04-07',
     creatorName: 'Shubham Singh',
     parentPath: '/docs/works'
   }
