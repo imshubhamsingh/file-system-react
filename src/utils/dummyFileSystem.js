@@ -109,4 +109,10 @@ const dummyFileSystem = [
   }
 ];
 
-export default dummyFileSystem;
+const generatedummyFileSystem = () => {
+  localStorage.setItem('fileSystem', JSON.stringify(dummyFileSystem));
+
+  return dummyFileSystem;
+};
+
+export default generatedummyFileSystem;

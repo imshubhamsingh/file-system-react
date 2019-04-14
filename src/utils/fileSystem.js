@@ -2,8 +2,13 @@ import { FOLDER, FILE } from './constants';
 
 const search = (arr, entry) => {
   let no = 0;
+
   arr.forEach(element => {
-    if (element.name.includes(entry.name) && element.type === entry.type) {
+    if (
+      element.name.includes(entry.name) &&
+      element.type === entry.type &&
+      element.parentPath === entry.parentPath
+    ) {
       no++;
     }
   });
@@ -12,11 +17,15 @@ const search = (arr, entry) => {
 
 export const AddEntry = (data, newEntry) => {
   let no = search(data, newEntry);
+  console.log(no);
   if (no > 0) {
     if (newEntry.type === FILE) {
       let temp = newEntry.name.split('.');
-      temp[temp.length - 2] = `${temp[temp.length - 2]}_${no}`;
-      newEntry.name = temp.join('.');
+      if (temp.length > 1) {
+        temp[temp.length - 2] = `${temp[temp.length - 2]}_${no}`;
+        newEntry.name = temp.join('.');
+      }
+      newEntry.name = `${newEntry.name}_${no}`;
     } else {
       newEntry.name = `${newEntry.name}_${no}`;
     }
@@ -30,19 +39,19 @@ export const AddEntry = (data, newEntry) => {
     newEntry.children = [];
   }
 
+  console.log(newEntry);
+
   let newData = [...data, newEntry];
   localStorage.setItem('fileSystem', JSON.stringify(newData));
 
   return newData;
 };
 
-export const DeleteEntry = (data, path) => {
+export const DeleteEntry = (data, entry) => {
   let afterDelete = data.filter(node => {
-    return !node.path.includes(path);
+    return !node.path.includes(entry.path);
   });
-
   localStorage.setItem('fileSystem', JSON.stringify(afterDelete));
-
   return afterDelete;
 };
 
@@ -85,13 +94,17 @@ export const showPathEntries = (parentPath, fileSystem) => {
   return fileSystem.filter(node => node.parentPath === parentPath);
 };
 
-export const objectsAreSame = (x, y) => {
+export const entriesAreSame = (x, y) => {
   var objectsAreSame = true;
+  if (x.length !== y.length) {
+    return false;
+  }
   for (var propertyName in x) {
     if (x[propertyName] !== y[propertyName]) {
       objectsAreSame = false;
       break;
     }
   }
+  console.log(objectsAreSame);
   return objectsAreSame;
 };

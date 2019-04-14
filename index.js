@@ -13,16 +13,18 @@ import '@Styles/App.scss';
 import reducers from '@Reducer';
 import { ViewFiles } from '@Pages';
 
-import dummyFileSystem from '@Utils/dummyFileSystem';
+import generatedummyFileSystem from '@Utils/dummyFileSystem';
 
 const rootEl = document.getElementById('root');
 
 const store = createStore(
   reducers,
   {
-    fileSystem: localStorage.getItem('fileSystem')
-      ? [...JSON.parse(localStorage.getItem('fileSystem'))]
-      : dummyFileSystem
+    fileSystem:
+      localStorage.getItem('fileSystem') &&
+      localStorage.getItem('fileSystem').length > 0
+        ? [...JSON.parse(localStorage.getItem('fileSystem'))]
+        : generatedummyFileSystem()
   },
   composeWithDevTools()
 );

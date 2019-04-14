@@ -33,7 +33,9 @@ const Navigation = props => {
       <div
         style={{ marginTop: -2, cursor: 'pointer' }}
         onClick={() => {
-          props.history.push(goBack(props.location.pathname));
+          props.location.pathname === '/'
+            ? null
+            : props.history.push(goBack(props.location.pathname));
         }}
       >
         <GoBack

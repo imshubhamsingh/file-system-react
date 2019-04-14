@@ -18,64 +18,66 @@ class SideMenu extends Component {
 
   handler = (children, value) => {
     let i = value + 1;
-    return children.map((entry, _) => {
-      if (entry.type == FILE) return;
-      const flag = entry.children
-        ? entry.children.length
-          ? true
-          : false
-        : false;
-      if (!flag) {
-        return (
-          <LinkContainer
-            key={entry.path}
-            onClick={() => this.props.history.push(entry.path)}
-            className={
-              this.props.location.pathname === entry.path ? 'selected' : ''
-            }
-          >
-            <div className="link" style={{ marginLeft: `${10 * i}px` }}>
-              {entry.name}
-            </div>
-          </LinkContainer>
-        );
-      }
-      return (
-        <Collapse index={i} key={entry.path}>
-          {(visible, handleVisible) => {
+    return children && children.length > 0
+      ? children.map((entry, _) => {
+          if (entry.type == FILE) return;
+          const flag = entry.children
+            ? entry.children.length
+              ? true
+              : false
+            : false;
+          if (!flag) {
             return (
-              <Fragment>
-                <LinkContainer
-                  key={entry.path}
-                  className={
-                    this.props.location.pathname === entry.path
-                      ? 'selected'
-                      : ''
-                  }
-                >
-                  <div
-                    className="link"
-                    style={{
-                      marginLeft: `${10 * i}px`,
-                      width: '100%'
-                    }}
-                    onClick={() => this.props.history.push(entry.path)}
-                  >
-                    {entry.name}
-                  </div>
-                  <div className="dropdown" onClick={() => handleVisible()}>
-                    <DropDownIcon className={visible ? '' : 'clicked'} />
-                  </div>
-                </LinkContainer>
-                <div style={{ position: 'relative' }}>
-                  {visible ? this.handler(entry.children, i) : ''}
+              <LinkContainer
+                key={entry.path}
+                onClick={() => this.props.history.push(entry.path)}
+                className={
+                  this.props.location.pathname === entry.path ? 'selected' : ''
+                }
+              >
+                <div className="link" style={{ marginLeft: `${10 * i}px` }}>
+                  {entry.name}
                 </div>
-              </Fragment>
+              </LinkContainer>
             );
-          }}
-        </Collapse>
-      );
-    });
+          }
+          return (
+            <Collapse index={i} key={entry.path}>
+              {(visible, handleVisible) => {
+                return (
+                  <Fragment>
+                    <LinkContainer
+                      key={entry.path}
+                      className={
+                        this.props.location.pathname === entry.path
+                          ? 'selected'
+                          : ''
+                      }
+                    >
+                      <div
+                        className="link"
+                        style={{
+                          marginLeft: `${10 * i}px`,
+                          width: '100%'
+                        }}
+                        onClick={() => this.props.history.push(entry.path)}
+                      >
+                        {entry.name}
+                      </div>
+                      <div className="dropdown" onClick={() => handleVisible()}>
+                        <DropDownIcon className={visible ? '' : 'clicked'} />
+                      </div>
+                    </LinkContainer>
+                    <div style={{ position: 'relative' }}>
+                      {visible ? this.handler(entry.children, i) : ''}
+                    </div>
+                  </Fragment>
+                );
+              }}
+            </Collapse>
+          );
+        })
+      : '';
   };
 
   render() {

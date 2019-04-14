@@ -35009,7 +35009,7 @@ function (_Component) {
     });
     (0, _defineProperty2.default)((0, _assertThisInitialized2.default)(_this), "handler", function (children, value) {
       var i = value + 1;
-      return children.map(function (entry, _) {
+      return children && children.length > 0 ? children.map(function (entry, _) {
         if (entry.type == _constants.FILE) return;
         var flag = entry.children ? entry.children.length ? true : false : false;
 
@@ -35057,7 +35057,7 @@ function (_Component) {
             }
           }, visible ? _this.handler(entry.children, i) : ''));
         });
-      });
+      }) : '';
     });
     return _this;
   }
@@ -35087,7 +35087,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.objectsAreSame = exports.showPathEntries = exports.generateTreeFromList = exports.DeleteEntry = exports.AddEntry = void 0;
+exports.entriesAreSame = exports.showPathEntries = exports.generateTreeFromList = exports.DeleteEntry = exports.AddEntry = void 0;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
@@ -35098,7 +35098,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var search = function search(arr, entry) {
   var no = 0;
   arr.forEach(function (element) {
-    if (element.name.includes(entry.name) && element.type === entry.type) {
+    if (element.name.includes(entry.name) && element.type === entry.type && element.parentPath === entry.parentPath) {
       no++;
     }
   });
@@ -35107,12 +35107,18 @@ var search = function search(arr, entry) {
 
 var AddEntry = function AddEntry(data, newEntry) {
   var no = search(data, newEntry);
+  console.log(no);
 
   if (no > 0) {
     if (newEntry.type === _constants.FILE) {
       var temp = newEntry.name.split('.');
-      temp[temp.length - 2] = "".concat(temp[temp.length - 2], "_").concat(no);
-      newEntry.name = temp.join('.');
+
+      if (temp.length > 1) {
+        temp[temp.length - 2] = "".concat(temp[temp.length - 2], "_").concat(no);
+        newEntry.name = temp.join('.');
+      }
+
+      newEntry.name = "".concat(newEntry.name, "_").concat(no);
     } else {
       newEntry.name = "".concat(newEntry.name, "_").concat(no);
     }
@@ -35124,6 +35130,7 @@ var AddEntry = function AddEntry(data, newEntry) {
     newEntry.children = [];
   }
 
+  console.log(newEntry);
   var newData = [].concat((0, _toConsumableArray2.default)(data), [newEntry]);
   localStorage.setItem('fileSystem', JSON.stringify(newData));
   return newData;
@@ -35131,9 +35138,9 @@ var AddEntry = function AddEntry(data, newEntry) {
 
 exports.AddEntry = AddEntry;
 
-var DeleteEntry = function DeleteEntry(data, path) {
+var DeleteEntry = function DeleteEntry(data, entry) {
   var afterDelete = data.filter(function (node) {
-    return !node.path.includes(path);
+    return !node.path.includes(entry.path);
   });
   localStorage.setItem('fileSystem', JSON.stringify(afterDelete));
   return afterDelete;
@@ -35189,8 +35196,12 @@ var showPathEntries = function showPathEntries(parentPath, fileSystem) {
 
 exports.showPathEntries = showPathEntries;
 
-var objectsAreSame = function objectsAreSame(x, y) {
+var entriesAreSame = function entriesAreSame(x, y) {
   var objectsAreSame = true;
+
+  if (x.length !== y.length) {
+    return false;
+  }
 
   for (var propertyName in x) {
     if (x[propertyName] !== y[propertyName]) {
@@ -35199,10 +35210,11 @@ var objectsAreSame = function objectsAreSame(x, y) {
     }
   }
 
+  console.log(objectsAreSame);
   return objectsAreSame;
 };
 
-exports.objectsAreSame = objectsAreSame;
+exports.entriesAreSame = entriesAreSame;
 },{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","./constants":"src/utils/constants.js"}],"src/components/Sidebar/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -35443,7 +35455,13 @@ var dummyFileSystem = [{
   creatorName: 'Shubham Singh',
   parentPath: '/docs/works'
 }];
-var _default = dummyFileSystem;
+
+var generatedummyFileSystem = function generatedummyFileSystem() {
+  localStorage.setItem('fileSystem', JSON.stringify(dummyFileSystem));
+  return dummyFileSystem;
+};
+
+var _default = generatedummyFileSystem;
 exports.default = _default;
 },{}],"src/utils/fileSystem.js":[function(require,module,exports) {
 "use strict";
@@ -35451,7 +35469,7 @@ exports.default = _default;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.objectsAreSame = exports.showPathEntries = exports.generateTreeFromList = exports.DeleteEntry = exports.AddEntry = void 0;
+exports.entriesAreSame = exports.showPathEntries = exports.generateTreeFromList = exports.DeleteEntry = exports.AddEntry = void 0;
 
 var _toConsumableArray2 = _interopRequireDefault(require("@babel/runtime/helpers/toConsumableArray"));
 
@@ -35462,7 +35480,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var search = function search(arr, entry) {
   var no = 0;
   arr.forEach(function (element) {
-    if (element.name.includes(entry.name) && element.type === entry.type) {
+    if (element.name.includes(entry.name) && element.type === entry.type && element.parentPath === entry.parentPath) {
       no++;
     }
   });
@@ -35471,12 +35489,18 @@ var search = function search(arr, entry) {
 
 var AddEntry = function AddEntry(data, newEntry) {
   var no = search(data, newEntry);
+  console.log(no);
 
   if (no > 0) {
     if (newEntry.type === _constants.FILE) {
       var temp = newEntry.name.split('.');
-      temp[temp.length - 2] = "".concat(temp[temp.length - 2], "_").concat(no);
-      newEntry.name = temp.join('.');
+
+      if (temp.length > 1) {
+        temp[temp.length - 2] = "".concat(temp[temp.length - 2], "_").concat(no);
+        newEntry.name = temp.join('.');
+      }
+
+      newEntry.name = "".concat(newEntry.name, "_").concat(no);
     } else {
       newEntry.name = "".concat(newEntry.name, "_").concat(no);
     }
@@ -35488,6 +35512,7 @@ var AddEntry = function AddEntry(data, newEntry) {
     newEntry.children = [];
   }
 
+  console.log(newEntry);
   var newData = [].concat((0, _toConsumableArray2.default)(data), [newEntry]);
   localStorage.setItem('fileSystem', JSON.stringify(newData));
   return newData;
@@ -35495,9 +35520,9 @@ var AddEntry = function AddEntry(data, newEntry) {
 
 exports.AddEntry = AddEntry;
 
-var DeleteEntry = function DeleteEntry(data, path) {
+var DeleteEntry = function DeleteEntry(data, entry) {
   var afterDelete = data.filter(function (node) {
-    return !node.path.includes(path);
+    return !node.path.includes(entry.path);
   });
   localStorage.setItem('fileSystem', JSON.stringify(afterDelete));
   return afterDelete;
@@ -35553,8 +35578,12 @@ var showPathEntries = function showPathEntries(parentPath, fileSystem) {
 
 exports.showPathEntries = showPathEntries;
 
-var objectsAreSame = function objectsAreSame(x, y) {
+var entriesAreSame = function entriesAreSame(x, y) {
   var objectsAreSame = true;
+
+  if (x.length !== y.length) {
+    return false;
+  }
 
   for (var propertyName in x) {
     if (x[propertyName] !== y[propertyName]) {
@@ -35563,10 +35592,11 @@ var objectsAreSame = function objectsAreSame(x, y) {
     }
   }
 
+  console.log(objectsAreSame);
   return objectsAreSame;
 };
 
-exports.objectsAreSame = objectsAreSame;
+exports.entriesAreSame = entriesAreSame;
 },{"@babel/runtime/helpers/toConsumableArray":"node_modules/@babel/runtime/helpers/toConsumableArray.js","./constants":"src/utils/constants.js"}],"src/reducers/fileSystemReducer.js":[function(require,module,exports) {
 "use strict";
 
@@ -35722,7 +35752,7 @@ var Navigation = function Navigation(props) {
       cursor: 'pointer'
     },
     onClick: function onClick() {
-      props.history.push(goBack(props.location.pathname));
+      props.location.pathname === '/' ? null : props.history.push(goBack(props.location.pathname));
     }
   }, _react.default.createElement(_GoBack.default, {
     fill: props.location.pathname === '/' ? '#acb9c3' : '#545B61'
@@ -37549,10 +37579,10 @@ var addEntry = function addEntry(entry) {
 
 exports.addEntry = addEntry;
 
-var deleteEntry = function deleteEntry(entryPath) {
+var deleteEntry = function deleteEntry(entry) {
   return {
     type: _constants.DELETE_ENTRY,
-    payload: entryPath
+    payload: entry
   };
 };
 
@@ -44918,11 +44948,15 @@ function (_Component) {
   }, {
     key: "shouldComponentUpdate",
     value: function shouldComponentUpdate(nextProps, nextState) {
-      if (!(0, _fileSystem.entriesAreSame)(this.props.entry, nextProps.entry)) {
+      if (this.props.location.pathname === nextProps.location.pathname) {
+        if ((0, _fileSystem.entriesAreSame)(this.props.entry, nextProps.entry)) {
+          return false;
+        }
+
         return true;
       }
 
-      return false;
+      return true;
     }
   }, {
     key: "render",
@@ -44940,7 +44974,7 @@ function (_Component) {
           index: _,
           key: "".concat(entry.path, "_").concat(entry.type),
           deleteFn: function deleteFn() {
-            _this2.props.deleteEntry(entry.path);
+            _this2.props.deleteEntry(entry);
           }
         });
       }), _react.default.createElement(_Add.default, {
@@ -45090,7 +45124,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var rootEl = document.getElementById('root');
 var store = (0, _redux.createStore)(_reducers.default, {
-  fileSystem: localStorage.getItem('fileSystem') ? (0, _toConsumableArray2.default)(JSON.parse(localStorage.getItem('fileSystem'))) : _dummyFileSystem.default
+  fileSystem: localStorage.getItem('fileSystem') && localStorage.getItem('fileSystem').length > 0 ? (0, _toConsumableArray2.default)(JSON.parse(localStorage.getItem('fileSystem'))) : (0, _dummyFileSystem.default)()
 }, (0, _reduxDevtoolsExtension.composeWithDevTools)());
 
 var App = function App() {
@@ -45132,7 +45166,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65265" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53950" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

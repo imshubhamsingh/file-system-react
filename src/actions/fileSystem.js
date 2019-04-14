@@ -7,9 +7,9 @@ export const addEntry = entry => {
   };
 };
 
-export const deleteEntry = entryPath => {
+export const deleteEntry = entry => {
   return {
     type: DELETE_ENTRY,
-    payload: entryPath
+    payload: entry
   };
 };

@@ -24,10 +24,13 @@ class Grid extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (!entriesAreSame(this.props.entry, nextProps.entry)) {
+    if (this.props.location.pathname === nextProps.location.pathname) {
+      if (entriesAreSame(this.props.entry, nextProps.entry)) {
+        return false;
+      }
       return true;
     }
-    return false;
+    return true;
   }
 
   render() {
@@ -45,7 +48,7 @@ class Grid extends Component {
             index={_}
             key={`${entry.path}_${entry.type}`}
             deleteFn={() => {
-              this.props.deleteEntry(entry.path);
+              this.props.deleteEntry(entry);
             }}
           />
         ))}
