@@ -35710,7 +35710,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var Sidebar = function Sidebar(_ref) {
   var fileStructure = _ref.fileStructure;
   var children = fileStructure[0].children;
-  console.log(children);
 
   var _useState = (0, _react.useState)(true),
       _useState2 = (0, _slicedToArray2.default)(_useState, 2),
