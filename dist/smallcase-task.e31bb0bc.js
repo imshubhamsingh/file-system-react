@@ -32338,6 +32338,7 @@ var search = function search(arr, entry) {
   var no = 0;
   arr[entry.parentID].children.forEach(function (elementId) {
     if (arr[elementId].name.includes(entry.name) && arr[elementId].type === entry.type) {
+      console.log(elementId);
       no++;
     }
   });
@@ -32346,6 +32347,7 @@ var search = function search(arr, entry) {
 
 var AddEntry = function AddEntry(data, newEntry) {
   var no = search(data, newEntry);
+  console.log(no);
   console.log(no);
 
   if (no > 0) {
@@ -45135,7 +45137,8 @@ function FileInfo(_props) {
       onChange: props.handleChange,
       name: "name",
       className: "field",
-      value: props.values.name
+      value: props.values.name,
+      autocomplete: "off"
     }), props.errors.name && props.touched.name ? _react.default.createElement(_styles.Error, null, props.errors.name) : ''), _react.default.createElement("div", {
       className: "formField"
     }, _react.default.createElement(_formik.Field, {
@@ -45143,7 +45146,8 @@ function FileInfo(_props) {
       onChange: props.handleChange,
       name: "creatorName",
       className: "field",
-      value: props.values.creatorName
+      value: props.values.creatorName,
+      autocomplete: "off"
     }), props.errors.creatorName && props.touched.creatorName ? _react.default.createElement(_styles.Error, null, props.errors.creatorName) : ''), _react.default.createElement("div", {
       className: "formField"
     }, _react.default.createElement(_formik.Field, {

@@ -73,6 +73,7 @@ function FileInfo(_props) {
                 name="name"
                 className="field"
                 value={props.values.name}
+                autocomplete="off"
               />
               {props.errors.name && props.touched.name ? (
                 <Error>{props.errors.name}</Error>
@@ -88,6 +89,7 @@ function FileInfo(_props) {
                 name="creatorName"
                 className="field"
                 value={props.values.creatorName}
+                autocomplete="off"
               />
               {props.errors.creatorName && props.touched.creatorName ? (
                 <Error>{props.errors.creatorName}</Error>

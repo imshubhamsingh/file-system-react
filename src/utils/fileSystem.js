@@ -9,6 +9,7 @@ const search = (arr, entry) => {
       arr[elementId].name.includes(entry.name) &&
       arr[elementId].type === entry.type
     ) {
+      console.log(elementId);
       no++;
     }
   });
@@ -17,6 +18,7 @@ const search = (arr, entry) => {
 
 export const AddEntry = (data, newEntry) => {
   let no = search(data, newEntry);
+  console.log(no);
   console.log(no);
   if (no > 0) {
     if (newEntry.type === FILE) {
