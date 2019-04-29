@@ -80,13 +80,11 @@ export const generateTreeFromList = _list => {
     let parentID = list[nodeID].parentID;
 
     if (list[parentID]) {
-      // if (!list[parentIndex].children) {
-      //   return (list[parentIndex].children = [node]);
-      // }
       let index = list[parentID].children.indexOf(nodeID);
       if (index !== -1) list[parentID].children.splice(index, 1);
-
-      list[parentID].children.push(list[nodeID]);
+      if (list[nodeID].type === FOLDER) {
+        list[parentID].children.push(list[nodeID]);
+      }
     }
   });
   return root;

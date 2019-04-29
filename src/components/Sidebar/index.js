@@ -9,6 +9,7 @@ import { SideBarContainer, Root, ShowMenu } from './styles';
 
 const Sidebar = ({ fileStructure }) => {
   let children = fileStructure[0].children;
+  console.log(children);
   const [toggle, handleToggle] = useState(true);
   return (
     <SideBarContainer toggle={toggle}>
