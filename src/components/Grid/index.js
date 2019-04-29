@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import md5 from 'md5';
 
 import SEO from '@Components/SEO';
 
 import { showPathEntries, entriesAreSame } from '@Utils/fileSystem';
+import { FOLDER } from '@Utils/constants';
 import { addEntry, deleteEntry } from '@Action/fileSystem';
 
 import Icon from '../Icon';
@@ -15,23 +17,23 @@ import FolderIcon from '@Image/folder.png';
 class Grid extends Component {
   componentDidMount() {
     if (
-      this.props.fileSystem.find(
-        el => el.path === this.props.location.pathname
-      ) === undefined
+      !Object.keys(this.props.fileSystem).includes(
+        md5(this.props.location.pathname + FOLDER)
+      )
     ) {
       this.props.history.push('/');
     }
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.location.pathname === nextProps.location.pathname) {
-      if (entriesAreSame(this.props.entry, nextProps.entry)) {
-        return false;
-      }
-      return true;
-    }
-    return true;
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   if (this.props.location.pathname === nextProps.location.pathname) {
+  //     if (entriesAreSame(this.props.entry, nextProps.entry)) {
+  //       return false;
+  //     }
+  //     return true;
+  //   }
+  //   return true;
+  // }
 
   render() {
     return (
@@ -48,7 +50,7 @@ class Grid extends Component {
             index={_}
             key={`${entry.path}_${entry.type}`}
             deleteFn={() => {
-              this.props.deleteEntry(entry);
+              this.props.deleteEntry(md5(entry.path + entry.type));
             }}
           />
         ))}
@@ -56,6 +58,7 @@ class Grid extends Component {
           saveEntry={value => {
             this.props.addEntry({
               ...value,
+              parentID: md5(this.props.match.url + FOLDER),
               parentPath: this.props.match.url
             });
           }}

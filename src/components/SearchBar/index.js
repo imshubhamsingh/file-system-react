@@ -64,7 +64,9 @@ class SearchBar extends Component {
               data={
                 this.state.mode === LOCAL
                   ? this.props.entry
-                  : this.props.fileSystem
+                  : Object.keys(this.props.fileSystem).map(
+                      id => this.props.fileSystem[id]
+                    )
               }
               closeResult={() => this.setState({ term: '' })}
             />

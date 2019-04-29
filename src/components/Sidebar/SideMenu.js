@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { FILE } from '@Utils/constants';
+import { entriesAreSame } from '@Utils/fileSystem';
 import Collapse from './Collapse';
 
 import { LinkContainer, DropDownIcon, Line } from './styles';
@@ -15,6 +16,16 @@ class SideMenu extends Component {
       fileStructure: nextProps.fileStructure
     };
   }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log(
+  //     entriesAreSame(nextProps.fileStructure, this.props.fileStructure)
+  //   );
+  //   if (entriesAreSame(nextProps.fileStructure, this.props.fileStructure)) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   handler = (children, value) => {
     let i = value + 1;

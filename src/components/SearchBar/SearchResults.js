@@ -24,7 +24,7 @@ class SearchResults extends Component {
           data.map(arr => (
             <Result key={arr.path} onClick={() => this.handleClick(arr)}>
               <div>
-                <Img src={arr.type == 'file' ? FileIcon : FolderIcon} />
+                <Img src={arr.type == FILE ? FileIcon : FolderIcon} />
                 {arr.name}
               </div>
 

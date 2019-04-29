@@ -10,7 +10,10 @@
   "author": "Shubham",
   "license": "ISC",
   "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "cryptr": "^4.0.2",
     "formik": "^1.5.2",
+    "md5": "^2.2.1",
     "parcel-bundler": "^1.10.3",
     "react": ">=15",
     "react-dom": "^16.7.0-alpha.2",
@@ -18,7 +21,9 @@
     "react-redux": "^7.0.1",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
-    "styled-components": "^4.1.1"
+    "sha.js": "^2.4.11",
+    "styled-components": "^4.1.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
