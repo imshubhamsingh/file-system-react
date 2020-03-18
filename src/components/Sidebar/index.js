@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import SideMenu from './SideMenu';
 import { connect } from 'react-redux';
 
-import { generateTreeFromList } from '@Utils/filesystem';
+import { generateTreeFromList } from '@Utils/fileSystem';
 
 import { SideBarContainer, Root, ShowMenu } from './styles';
 
