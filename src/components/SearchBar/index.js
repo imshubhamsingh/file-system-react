@@ -7,7 +7,7 @@ import { showPathEntries } from '@Utils/fileSystem';
 
 import MagnifyIcon from './MagnifyIcon';
 import SearchResults from './SearchResults';
-import Filter from './filter';
+import Filter from './Filter';
 
 import { Container, Line, Input } from './styles';
 
