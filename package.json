@@ -29,7 +29,7 @@
     "babel-plugin-styled-components": "^1.8.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "react-hot-loader": "^4.3.12",
     "redux-devtools-extension": "^2.13.8",
     "sass": "^1.15.0"
